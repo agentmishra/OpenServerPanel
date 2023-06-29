@@ -225,3 +225,4 @@ Switch off
 Select profile
 AUTOCERTIFICATE
 Unknown module
+Unknown zone
