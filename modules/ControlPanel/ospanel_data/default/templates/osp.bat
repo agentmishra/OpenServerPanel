@@ -369,7 +369,6 @@ if /i "%1"=="add" set "OSP_ACTIVE_ENV=%OSP_ACTIVE_ENV% + %2" & set "OSP_ACTIVE_E
 if not defined OSP_PSV if not exist "{root_dir}\temp\%2.lock" echo: & echo %ESC%[93m{lang_17}: %2 {lang_172}%ESC%[0m
 if /i not "%1"=="shell" if /i not "%3"=="silent" echo: & echo {lang_52}: %OSP_ACTIVE_ENV%
 if /i not "%1"=="shell" TITLE %OSP_ACTIVE_ENV% ^| Open Server Panel
-if defined PATH call :strfind "%PATH%" "{root_dir}\bin;" & if not defined OSP_TMPVAL set "PATH={root_dir}\bin;%PATH%"
 @exit /b 0
 :: -----------------------------------------------------------------------------------
 :: EXIT
