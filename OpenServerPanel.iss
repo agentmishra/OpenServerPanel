@@ -344,7 +344,7 @@ var
 begin
 	reg_root := HKEY_CURRENT_USER;
 	reg_path := 'Environment';
-	add_path := ExpandConstant('{app}') + '\system\cmd';
+	add_path := ExpandConstant('{app}') + '\bin';
 	RegQueryStringValue(reg_root, reg_path, 'Path', old_path);
 	old_path := old_path + ';';
 
