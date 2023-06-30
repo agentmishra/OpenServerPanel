@@ -226,3 +226,5 @@ Select profile
 AUTOCERTIFICATE
 Unknown module
 Unknown zone
+The DNSCache service is in an inactive state
+The HOSTS file contains more than 100,000 records (DNS subsystem failure is possible)
