@@ -198,8 +198,8 @@
             <div class='inner'>
                 <img src='dist/img/logo.png' style='margin: -10rem 0 10rem 0'>
                 <h1>Open Server Panel</h1>
-                <h2>{lang_159}</h2>
-                <button class='button-3' id='clibtn' role='button'>{lang_60}</button>
+                <h2>{lang_under_development}</h2>
+                <button class='button-3' id='clibtn' role='button'>{lang_launch_cli}</button>
             </div>
         </div>
     </div>
@@ -215,7 +215,7 @@
     $('#clibtn').on('click', function() {
         axios.get('{web_api_url}/cli').then(function(response) {
         }).catch(function(error) {
-            toastr.error('{lang_59}');
+            toastr.error('{lang_err_api_req_failed}');
         });
     });
     });
