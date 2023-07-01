@@ -75,7 +75,7 @@ echo {lang_calling_help}: osp help ^| {lang_program_version}: {osp_version} ^| Â
 :help
 call :logo
 echo:
-echo {lang_using}: osp ^<{lang_command}^> [^<{lang_arguments}^>]
+echo {lang_using}: osp ^<{lang_command_param}^> [^<{lang_arguments}^>]
 echo:
 echo {lang_env_management}:
 echo:
@@ -100,7 +100,7 @@ echo                             {lang_apply_mod_env_again_2}
 echo off     ^<MODULE^>            {lang_disable_mod}
 echo on      ^<MODULE^> [PROFILE]  {lang_enable_mod}
 echo restart ^<MODULE^> [PROFILE]  {lang_restart_mod}
-echo shell   ^<MODULE^>            {lang_launch_shell}
+echo shell   ^<MODULE^>            {lang_launch_shell_descr}
 echo status  ^<MODULE^>            {lang_show_mod_status}
 echo:
 echo {lang_other_commands}:
