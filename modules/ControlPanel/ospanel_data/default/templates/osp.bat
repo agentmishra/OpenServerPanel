@@ -258,6 +258,7 @@ echo:
 TITLE %OSP_TMP_NAME% shell ^| Open Server Panel
 call "{root_dir}\data\{module_name}\shell_%OSP_TMP_NAME%.bat"
 endlocal
+chcp 65001 > nul
 TITLE %OSP_ACTIVE_ENV% ^| Open Server Panel
 goto end
 :: -----------------------------------------------------------------------------------
