@@ -398,3 +398,6 @@ AddToPath=Add the program directory to the PATH variable
 PathCheckError=Valid path characters (maximum of 32 characters): A-Z,a-z,0-9,.,+,-,\,:,_
 PartitionTypeError=Invalid file system type (only NTFS is supported)
 DiskTypeError=Invalid disk type
+
+WantToDeleteDataFolder=Do you want to keep the data directory "data"?
+WantToDeleteHomeFolder=Do you want to keep the project directory "home"?

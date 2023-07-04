@@ -399,3 +399,6 @@ AddToPath=Додати каталог з програмою в змінну PATH
 PathCheckError=Допустимі символи шляху (не більше 32-х символів): A-Z,a-z,0-9,.,+,-,\,:,_,
 PartitionTypeError=Неприпустимий тип файлової системи (підтримується лише NTFS)
 DiskTypeError=Неприпустимий тип диска
+
+WantToDeleteDataFolder=Ви хочете залишити каталог даних "data"?
+WantToDeleteHomeFolder=Ви хочете залишити каталог проектів "home"?

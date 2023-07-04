@@ -385,3 +385,6 @@ AddToPath=Дадаць каталог з праграмай у зменную PA
 PathCheckError=Дапушчальныя сімвалы шляху (не больш за 32-х знакаў): A-Z,a-z,0-9,.,+,-,\,:,_
 PartitionTypeError=Недапушчальны тып файлавай сістэмы (падтрымліваецца толькі NTFS)
 DiskTypeError=Недапушчальны тып дыска
+
+WantToDeleteDataFolder=Вы хочаце пакінуць каталог дадзеных "data"?
+WantToDeleteHomeFolder=Вы хочаце пакінуць каталог праектаў "home"?
