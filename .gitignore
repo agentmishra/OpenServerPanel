@@ -5,11 +5,7 @@
 /system/public_html/plugins/
 /user/browscap/
 /user/geo/
-/data/PostgreSQL-*/
-/data/PostgreSQL-*/
-/data/MySQL-*/
-/data/MariaDB-*/
-/data/PHP-*/composer/composer.phar
+/modules/*/ospanel_data/default_data/*
 /modules/*/*
 /resources/php_addons/*
 /resources/php_bundle/*
