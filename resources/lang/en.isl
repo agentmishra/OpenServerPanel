@@ -398,6 +398,11 @@ AddToPath=Add the program directory to the PATH variable
 PathCheckError=Valid path characters (maximum of 32 characters): A-Z,a-z,0-9,.,+,-,\,:,_
 PartitionTypeError=Invalid file system type (only NTFS is supported)
 DiskTypeError=Invalid disk type
-
+InstallationMode=Select the installation mode
+InstallationModeDescr=Which application installation mode should be used?
+NormalInstallation=Normal installation
+PortableInstallation=Portable installation
+NormalInstallationDescr=Normal installation makes it possible to integrate the application into the operating system, as well as to uninstall it if necessary.
+PortableInstallationDescr=Portable mode allows you to unpack the application to the selected directory without installing it into the system. In this mode, it is not possible to create shortcuts to the application, add it to startup and integrate with the PATH variable.
 WantToDeleteDataFolder=Do you want to keep the data directory "data"?
 WantToDeleteHomeFolder=Do you want to keep the project directory "home"?
