@@ -48,8 +48,8 @@ if /i "%1"=="domains"     goto request
 if /i "%1"=="reset"       goto env_windows
 if /i "%1"=="restart"     goto mod_cmd
 if /i "%1"=="use"         goto env_set
-if /i "%1"=="initssl"     goto initssl
 if /i "%1"=="shell"       goto mod_shell
+if /i "%1"=="ssl"         goto initssl
 if /i "%1"=="status"      goto mod_cmd
 if /i "%1"=="sysprep"     goto sysprep
 if /i "%1"=="-v"          echo: & echo {lang_version_info}: Open Server Panel v{osp_version} x64 {osp_version_datetime} & goto end
@@ -108,9 +108,10 @@ echo:
 echo convert ^<DOMAIN^>            {lang_convert_from_to_punycode}
 echo domains                     {lang_show_info_about_domains}
 echo exit                        {lang_shutting_down_program}
-echo initssl                     {lang_gen_and_install_root_cert}
 echo log     ^<MODULE^|main^>  [N]  {lang_show_log}
 echo modules                     {lang_show_mod_info}
+echo ssl     ^<init^|deinit^>       {lang_gen_and_install_root_cert}
+echo                             {lang_about_gen_root_cert}
 echo sysprep [silent^|ssd]        {lang_launch_sp_tool}
 echo                             {lang_silent_flag}
 echo                             {lang_ssd_flag}
@@ -147,11 +148,23 @@ goto end
 :: INIT SSL
 :: -----------------------------------------------------------------------------------
 :initssl
+if "%2"=="" goto eargument
+if /i "%2"=="deinit" goto deinitssl
 if not exist "{root_dir}\system\ssl\gen_root_cert.bat" set "OSP_ERR_MSG={root_dir}\system\ssl\gen_root_cert.bat {lang_err_not_found}" & goto error
 if exist "{root_dir}\data\ssl\root\cert.crt" del /Q "{root_dir}\data\ssl\root\cert.crt"
+"%SystemRoot%\System32\certutil.exe" -user -delstore "Root" "Open Server Panel"
+"%SystemRoot%\System32\certutil.exe" -urlcache * delete > nul 2> nul
 call "{root_dir}\system\ssl\gen_root_cert.bat"
 if not exist "{root_dir}\data\ssl\root\cert.crt" set "OSP_ERR_MSG={lang_err_failed_gen_root_cert}" & goto error
 "%SystemRoot%\System32\certutil.exe" -user -addstore "Root" "{root_dir}\data\ssl\root\cert.crt"
+"%SystemRoot%\System32\certutil.exe" -urlcache * delete > nul 2> nul
+goto end
+:: -----------------------------------------------------------------------------------
+:: DEINIT SSL
+:: -----------------------------------------------------------------------------------
+:deinitssl
+if exist "{root_dir}\data\ssl\root\cert.crt" del /Q "{root_dir}\data\ssl\root\cert.crt"
+"%SystemRoot%\System32\certutil.exe" -user -delstore "Root" "Open Server Panel"
 "%SystemRoot%\System32\certutil.exe" -urlcache * delete > nul 2> nul
 goto end
 :: -----------------------------------------------------------------------------------
