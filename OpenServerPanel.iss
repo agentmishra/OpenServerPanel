@@ -1,5 +1,5 @@
-#define AppVersion      "6.0.0.500"
-#define AppVersion_     "6_0_0_500"
+#define AppVersion      "6.0.0.510"
+#define AppVersion_     "6_0_0_510"
 #define AppDomain       "ospanel.io"
 #define AppTitle        "Open Server Panel"
 #define CurrentYear     GetDateTimeString('yyyy', '', '')
@@ -12,6 +12,7 @@ OutputBaseFilename      = ospanel_setup_{#AppVersion_}
 
 // Application info
 
+Appid                   = {#AppTitle} {#AppVersion}
 AppName                 = {#AppTitle}
 AppVersion              = {#AppVersion}
 AppVerName              = {#AppTitle} v{#AppVersion}
@@ -40,6 +41,7 @@ LZMANumFastBytes        = 273
 AllowNoIcons            = yes
 AllowRootDirectory      = yes
 AllowUNCPath            = no
+AppMutex                = Global\OSPanel
 ArchitecturesAllowed    = x64
 ArchitecturesInstallIn64BitMode = x64
 ChangesEnvironment      = yes
@@ -56,7 +58,9 @@ PrivilegesRequired      = lowest
 RestartApplications     = no
 SetupMutex              = Global\OSPSetup
 ShowLanguageDialog      = auto
-Uninstallable           = no
+Uninstallable           = IsUninstallable
+UninstallDisplayName    = {#AppTitle}
+UninstallDisplayIcon    = "{app}\bin\ospanel.exe"
 UsePreviousAppDir       = no
 UsePreviousGroup        = no
 UsePreviousLanguage     = no
@@ -81,207 +85,269 @@ Name: "import_cert";    Description:  "{cm:ImportCert}";                        
 
 [Icons]
 
-Name: "{group}\{#AppTitle}";              Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";     Components: core\panel;           Flags: createonlyiffileexists
-Name: "{group}\System Preparation Tool";  Filename: "{app}\system\bin\syspreptool.exe"; WorkingDir: "{app}"; Components: core\panel;           Flags: createonlyiffileexists
-Name: "{group}\{cm:RunManual}";           Filename: "https://github.com/OSPanel/OpenServerPanel/wiki";       Components: core\panel;           Languages: en
+Name: "{group}\{#AppTitle}";              Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";          Components: core\panel;           Flags: createonlyiffileexists
+Name: "{group}\System Preparation Tool";  Filename: "{app}\system\bin\syspreptool.exe"; WorkingDir: "{app}";      Components: core\panel;           Flags: createonlyiffileexists
+Name: "{group}\{cm:RunManual}";           Filename: "https://github.com/OSPanel/OpenServerPanel/wiki";            Components: core\panel;           Languages: en
 Name: "{group}\{cm:RunManual}";           Filename: "https://github.com/OSPanel/OpenServerPanel/wiki/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F"; Components: core\panel; Languages: ru ua be
-Name: "{group}\{cm:RunDonate}";           Filename: "https://ospanel.io/donate/";                            Components: core\panel
-Name: "{autodesktop}\{#AppTitle}";        Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";     Flags: createonlyiffileexists;    Tasks: desktop_icon
-Name: "{userstartup}\{#AppTitle}";        Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";     Flags: createonlyiffileexists;    Tasks: autostarticon
+Name: "{group}\{cm:RunDonate}";           Filename: "https://ospanel.io/donate/";                                 Components: core\panel
+Name: "{group}\{cm:UninstallProgram,{#AppTitle}}"; Filename: "{uninstallexe}";      WorkingDir: "{app}";          Components: core\panel;           Flags: createonlyiffileexists
+Name: "{autodesktop}\{#AppTitle}";        Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";          Flags: createonlyiffileexists;    Tasks: desktop_icon
+Name: "{userstartup}\{#AppTitle}";        Filename: "{app}\bin\ospanel.exe";        WorkingDir: "{app}";          Flags: createonlyiffileexists;    Tasks: autostarticon
 
 [Components]
 
-Name: "core";                  Description: "{cm:GeneralData}";                                              Flags: disablenouninstallwarning
-Name: "core\panel";            Description: "{cm:CoreData}";      Types: full compact;                       Flags: disablenouninstallwarning
-Name: "core\browscap";         Description: "{cm:Browscap}";      Types: full;                               Flags: disablenouninstallwarning
-Name: "core\geobases";         Description: "{cm:Geobases}";      Types: full;                               Flags: disablenouninstallwarning
+Name: "core";                  Description: "{cm:GeneralData}";                                                   Flags: disablenouninstallwarning
+Name: "core\panel";            Description: "{cm:CoreData}";      Types: full compact;                            Flags: disablenouninstallwarning
+Name: "core\browscap";         Description: "{cm:Browscap}";      Types: full;                                    Flags: disablenouninstallwarning
+Name: "core\geobases";         Description: "{cm:Geobases}";      Types: full;                                    Flags: disablenouninstallwarning
  
-Name: "dns";                   Description: "DNS";                                                           Flags: disablenouninstallwarning
-Name: "dns\bind";              Description: "Bind";               Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;  
-Name: "dns\unbound";           Description: "Unbound";            Types: full;                               Flags: disablenouninstallwarning
+Name: "dns";                   Description: "DNS";                                                                Flags: disablenouninstallwarning
+Name: "dns\bind";              Description: "Bind";               Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;  
+Name: "dns\unbound";           Description: "Unbound";            Types: full;                                    Flags: disablenouninstallwarning
 
-Name: "git";                   Description: "Git";                Types: full;                               Flags: disablenouninstallwarning
+Name: "git";                   Description: "Git";                Types: full;                                    Flags: disablenouninstallwarning
 
-Name: "mdb";                   Description: "MariaDB";                                                       Flags: disablenouninstallwarning
-Name: "mdb\mariadb101";        Description: "MariaDB 10.1";       Types: full;                               Flags: disablenouninstallwarning
-Name: "mdb\mariadb102";        Description: "MariaDB 10.2";       Types: full;                               Flags: disablenouninstallwarning
-Name: "mdb\mariadb103";        Description: "MariaDB 10.3";       Types: full;                               Flags: disablenouninstallwarning
-Name: "mdb\mariadb104";        Description: "MariaDB 10.4";       Types: full;                               Flags: disablenouninstallwarning
-Name: "mdb\mariadb105";        Description: "MariaDB 10.5";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb106";        Description: "MariaDB 10.6";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb107";        Description: "MariaDB 10.7";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb108";        Description: "MariaDB 10.8";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb109";        Description: "MariaDB 10.9";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb1010";       Description: "MariaDB 10.10";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb1011";       Description: "MariaDB 10.11";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mdb\mariadb110";        Description: "MariaDB 11.0";       Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb";               Description: "MariaDB";                                                            Flags: disablenouninstallwarning
+Name: "mariadb\mariadb101";    Description: "MariaDB 10.1";       Types: full;                                    Flags: disablenouninstallwarning
+Name: "mariadb\mariadb102";    Description: "MariaDB 10.2";       Types: full;                                    Flags: disablenouninstallwarning
+Name: "mariadb\mariadb103";    Description: "MariaDB 10.3";       Types: full;                                    Flags: disablenouninstallwarning
+Name: "mariadb\mariadb104";    Description: "MariaDB 10.4";       Types: full;                                    Flags: disablenouninstallwarning
+Name: "mariadb\mariadb105";    Description: "MariaDB 10.5";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb106";    Description: "MariaDB 10.6";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb107";    Description: "MariaDB 10.7";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb108";    Description: "MariaDB 10.8";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb109";    Description: "MariaDB 10.9";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb1010";   Description: "MariaDB 10.10";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb1011";   Description: "MariaDB 10.11";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mariadb\mariadb110";    Description: "MariaDB 11.0";       Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
 
-Name: "mem";                   Description: "Memcached";                                                     Flags: disablenouninstallwarning
-Name: "mem\memcached14";       Description: "Memcached 1.4";      Types: full;                               Flags: disablenouninstallwarning
-Name: "mem\memcached16";       Description: "Memcached 1.6";      Types: full;                               Flags: disablenouninstallwarning
+Name: "memcached";             Description: "Memcached";                                                          Flags: disablenouninstallwarning
+Name: "memcached\memcached14"; Description: "Memcached 1.4";      Types: full;                                    Flags: disablenouninstallwarning
+Name: "memcached\memcached16"; Description: "Memcached 1.6";      Types: full;                                    Flags: disablenouninstallwarning
 
-Name: "mongo";                 Description: "MongoDB";                                                       Flags: disablenouninstallwarning
-Name: "mongo\mongodb30";       Description: "MongoDB 3.0";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb32";       Description: "MongoDB 3.2";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb34";       Description: "MongoDB 3.4";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb36";       Description: "MongoDB 3.6";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb40";       Description: "MongoDB 4.0";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb42";       Description: "MongoDB 4.2";        Types: full;                               Flags: disablenouninstallwarning
-Name: "mongo\mongodb44";       Description: "MongoDB 4.4";        Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mongo\mongodb50";       Description: "MongoDB 5.0";        Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "mongo\mongodb60";       Description: "MongoDB 6.0";        Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mongodb";               Description: "MongoDB";                                                            Flags: disablenouninstallwarning
+Name: "mongodb\mongodb30";     Description: "MongoDB 3.0";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb32";     Description: "MongoDB 3.2";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb34";     Description: "MongoDB 3.4";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb36";     Description: "MongoDB 3.6";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb40";     Description: "MongoDB 4.0";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb42";     Description: "MongoDB 4.2";        Types: full;                                    Flags: disablenouninstallwarning
+Name: "mongodb\mongodb44";     Description: "MongoDB 4.4";        Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mongodb\mongodb50";     Description: "MongoDB 5.0";        Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mongodb\mongodb60";     Description: "MongoDB 6.0";        Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
 
-Name: "db";                    Description: "MySQL";                                                         Flags: disablenouninstallwarning
-Name: "db\mysql55";            Description: "MySQL 5.5";          Types: full;                               Flags: disablenouninstallwarning
-Name: "db\mysql56";            Description: "MySQL 5.6";          Types: full;                               Flags: disablenouninstallwarning
-Name: "db\mysql57";            Description: "MySQL 5.7";          Types: full compact;                       Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "db\mysql80";            Description: "MySQL 8.0";          Types: full compact;                       Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mysql";                 Description: "MySQL";                                                              Flags: disablenouninstallwarning
+Name: "mysql\mysql55";         Description: "MySQL 5.5";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "mysql\mysql56";         Description: "MySQL 5.6";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "mysql\mysql57";         Description: "MySQL 5.7";          Types: full compact;                            Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "mysql\mysql80";         Description: "MySQL 8.0";          Types: full compact;                            Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
 
-Name: "php";                   Description: "PHP";                                                           Flags: disablenouninstallwarning
-Name: "php\php71";             Description: "PHP 7.1";            Types: full;                               Flags: disablenouninstallwarning
-Name: "php\php72";             Description: "PHP 7.2";            Types: full;                               Flags: disablenouninstallwarning
-Name: "php\php73";             Description: "PHP 7.3";            Types: full;                               Flags: disablenouninstallwarning
-Name: "php\php74";             Description: "PHP 7.4";            Types: full compact;                       Flags: disablenouninstallwarning
-Name: "php\php80";             Description: "PHP 8.0";            Types: full compact;                       Flags: disablenouninstallwarning
-Name: "php\php81";             Description: "PHP 8.1";            Types: full compact;                       Flags: disablenouninstallwarning
-Name: "php\php82";             Description: "PHP 8.2";            Types: full compact;                       Flags: disablenouninstallwarning
+Name: "php";                   Description: "PHP";                                                                Flags: disablenouninstallwarning
+Name: "php\php71";             Description: "PHP 7.1";            Types: full;                                    Flags: disablenouninstallwarning
+Name: "php\php72";             Description: "PHP 7.2";            Types: full;                                    Flags: disablenouninstallwarning
+Name: "php\php73";             Description: "PHP 7.3";            Types: full;                                    Flags: disablenouninstallwarning
+Name: "php\php74";             Description: "PHP 7.4";            Types: full compact;                            Flags: disablenouninstallwarning
+Name: "php\php80";             Description: "PHP 8.0";            Types: full compact;                            Flags: disablenouninstallwarning
+Name: "php\php81";             Description: "PHP 8.1";            Types: full compact;                            Flags: disablenouninstallwarning
+Name: "php\php82";             Description: "PHP 8.2";            Types: full compact;                            Flags: disablenouninstallwarning
 
-Name: "psql";                  Description: "PostgreSQL";                                                    Flags: disablenouninstallwarning
-Name: "psql\postgresql95";     Description: "PostgreSQL 9.5";     Types: full;                               Flags: disablenouninstallwarning
-Name: "psql\postgresql96";     Description: "PostgreSQL 9.6";     Types: full;                               Flags: disablenouninstallwarning
-Name: "psql\postgresql10";     Description: "PostgreSQL 10";      Types: full;                               Flags: disablenouninstallwarning
-Name: "psql\postgresql11";     Description: "PostgreSQL 11";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "psql\postgresql12";     Description: "PostgreSQL 12";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "psql\postgresql13";     Description: "PostgreSQL 13";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "psql\postgresql14";     Description: "PostgreSQL 14";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
-Name: "psql\postgresql15";     Description: "PostgreSQL 15";      Types: full;                               Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "psql";                  Description: "PostgreSQL";                                                         Flags: disablenouninstallwarning
+Name: "psql\postgresql95";     Description: "PostgreSQL 9.5";     Types: full;                                    Flags: disablenouninstallwarning
+Name: "psql\postgresql96";     Description: "PostgreSQL 9.6";     Types: full;                                    Flags: disablenouninstallwarning
+Name: "psql\postgresql10";     Description: "PostgreSQL 10";      Types: full;                                    Flags: disablenouninstallwarning
+Name: "psql\postgresql11";     Description: "PostgreSQL 11";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "psql\postgresql12";     Description: "PostgreSQL 12";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "psql\postgresql13";     Description: "PostgreSQL 13";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "psql\postgresql14";     Description: "PostgreSQL 14";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
+Name: "psql\postgresql15";     Description: "PostgreSQL 15";      Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;
 
-Name: "redis";                 Description: "Redis";                                                         Flags: disablenouninstallwarning
-Name: "redis\redis30";         Description: "Redis 3.0";          Types: full;                               Flags: disablenouninstallwarning
-Name: "redis\redis32";         Description: "Redis 3.2";          Types: full;                               Flags: disablenouninstallwarning
-Name: "redis\redis40";         Description: "Redis 4.0";          Types: full;                               Flags: disablenouninstallwarning
-Name: "redis\redis50";         Description: "Redis 5.0";          Types: full;                               Flags: disablenouninstallwarning
-Name: "redis\redis70";         Description: "Redis 7.0";          Types: full;                               Flags: disablenouninstallwarning 
+Name: "redis";                 Description: "Redis";                                                              Flags: disablenouninstallwarning
+Name: "redis\redis30";         Description: "Redis 3.0";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "redis\redis32";         Description: "Redis 3.2";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "redis\redis40";         Description: "Redis 4.0";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "redis\redis50";         Description: "Redis 5.0";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "redis\redis70";         Description: "Redis 7.0";          Types: full;                                    Flags: disablenouninstallwarning 
 
 [Files]
 
-Source: "config\*";                                               DestDir: "{app}\config";                   Flags: sortfilesbyextension sortfilesbyname ignoreversion confirmoverwrite;                                 Components: core\panel;                   Permissions: users-full
-Source: "licenses\*";                                             DestDir: "{app}\licenses";                 Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "bin\*";                                                  DestDir: "{app}\bin";                      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "home\*";                                                 DestDir: "{app}\home";                     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "system\*";                                               DestDir: "{app}\system";                   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "user\blackfire\*";                                       DestDir: "{app}\user\blackfire";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "user\ssl\*";                                             DestDir: "{app}\user\ssl";                 Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "user\browscap\lite_php_browscap.ini";                    DestDir: "{app}\user\browscap";            Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "modules\ControlPanel\*";                                 DestDir: "{app}\modules\ControlPanel";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
-Source: "modules\Perl\*";                                         DestDir: "{app}\modules\Perl";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\panel;                   Permissions: users-full
+Source: "config\*";                                               DestDir: "{app}\config";                        Flags: sortfilesbyextension sortfilesbyname ignoreversion confirmoverwrite;                                  Components: core\panel;                      Permissions: users-full
+Source: "licenses\*";                                             DestDir: "{app}\licenses";                      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
+Source: "bin\*";                                                  DestDir: "{app}\bin";                           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
+Source: "home\*";                                                 DestDir: "{app}\home";                          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite; Components: core\panel;   Permissions: users-full
+Source: "system\*";                                               DestDir: "{app}\system";                        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
+Source: "user\ssl\*";                                             DestDir: "{app}\user\ssl";                      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
+Source: "modules\ControlPanel\*";                                 DestDir: "{app}\modules\ControlPanel";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
+Source: "modules\Perl\*";                                         DestDir: "{app}\modules\Perl";                  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
 
-Source: "user\browscap\*"; Excludes: "lite_php_browscap.ini";     DestDir: "{app}\user\browscap";            Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: core\browscap;     Permissions: users-full
-Source: "user\geo\*";                                             DestDir: "{app}\user\geo";                 Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: core\geobases;                Permissions: users-full
+Source: "user\browscap\*"; Excludes: "lite_php_browscap.ini";     DestDir: "{app}\user\browscap";                 Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: core\browscap;         Permissions: users-full
+Source: "user\geo\*";                                             DestDir: "{app}\user\geo";                      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\geobases;                   Permissions: users-full
 
-Source: "modules\PHP-7.1\*";                                      DestDir: "{app}\modules\PHP-7.1";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: php\php71;         Permissions: users-full
-Source: "modules\PHP-7.2\*";                                      DestDir: "{app}\modules\PHP-7.2";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php72;                    Permissions: users-full
-Source: "modules\PHP-7.3\*";                                      DestDir: "{app}\modules\PHP-7.3";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php73;                    Permissions: users-full
-Source: "modules\PHP-7.4\*";                                      DestDir: "{app}\modules\PHP-7.4";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php74;                    Permissions: users-full
-Source: "modules\PHP-8.0\*";                                      DestDir: "{app}\modules\PHP-8.0";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php80;                    Permissions: users-full
-Source: "modules\PHP-8.1\*";                                      DestDir: "{app}\modules\PHP-8.1";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php81;                    Permissions: users-full
-Source: "modules\PHP-8.2\*";                                      DestDir: "{app}\modules\PHP-8.2";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php82;                    Permissions: users-full
+Source: "modules\PHP-7.1\*";                                      DestDir: "{app}\modules\PHP-7.1";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: php\php71;             Permissions: users-full
+Source: "modules\PHP-7.2\*";                                      DestDir: "{app}\modules\PHP-7.2";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php72;                       Permissions: users-full
+Source: "modules\PHP-7.3\*";                                      DestDir: "{app}\modules\PHP-7.3";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php73;                       Permissions: users-full
+Source: "modules\PHP-7.4\*";                                      DestDir: "{app}\modules\PHP-7.4";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php74;                       Permissions: users-full
+Source: "modules\PHP-8.0\*";                                      DestDir: "{app}\modules\PHP-8.0";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php80;                       Permissions: users-full
+Source: "modules\PHP-8.1\*";                                      DestDir: "{app}\modules\PHP-8.1";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php81;                       Permissions: users-full
+Source: "modules\PHP-8.2\*";                                      DestDir: "{app}\modules\PHP-8.2";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php82;                       Permissions: users-full
 
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.1\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php71;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.2\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php72;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.3\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php73;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.4\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php74;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.0\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php80;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.1\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php81;                    Permissions: users-full
-Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.2\PHP";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php82;                    Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.1\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php71;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.2\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php72;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.3\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php73;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-7.4\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php74;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.0\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php80;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.1\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php81;                       Permissions: users-full
+Source: "resources\php_bundle\*";                                 DestDir: "{app}\modules\PHP-8.2\PHP";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php82;                       Permissions: users-full
 
-Source: "modules\MySQL-5.5\*";                                    DestDir: "{app}\modules\MySQL-5.5";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: db\mysql55;        Permissions: users-full
-Source: "modules\MySQL-5.6\*";                                    DestDir: "{app}\modules\MySQL-5.6";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql56;                   Permissions: users-full
-Source: "modules\MySQL-5.7\*";                                    DestDir: "{app}\modules\MySQL-5.7";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql57;                   Permissions: users-full
-Source: "modules\MySQL-8.0\*";                                    DestDir: "{app}\modules\MySQL-8.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql80;                   Permissions: users-full
+Source: "user\browscap\lite_php_browscap.ini";                    DestDir: "{app}\user\browscap";                 Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php71 php\php72 php\php73 php\php74 php\php80 php\php81 php\php82; Permissions: users-full
 
-Source: "modules\MariaDB-10.1\*";                                 DestDir: "{app}\modules\MariaDB-10.1";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb101;               Permissions: users-full
-Source: "modules\MariaDB-10.2\*";                                 DestDir: "{app}\modules\MariaDB-10.2";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb102;               Permissions: users-full
-Source: "modules\MariaDB-10.3\*";                                 DestDir: "{app}\modules\MariaDB-10.3";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb103;               Permissions: users-full
-Source: "modules\MariaDB-10.4\*";                                 DestDir: "{app}\modules\MariaDB-10.4";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb104;               Permissions: users-full
-Source: "modules\MariaDB-10.5\*";                                 DestDir: "{app}\modules\MariaDB-10.5";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb105;               Permissions: users-full
-Source: "modules\MariaDB-10.6\*";                                 DestDir: "{app}\modules\MariaDB-10.6";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb106;               Permissions: users-full
-Source: "modules\MariaDB-10.7\*";                                 DestDir: "{app}\modules\MariaDB-10.7";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb107;               Permissions: users-full
-Source: "modules\MariaDB-10.8\*";                                 DestDir: "{app}\modules\MariaDB-10.8";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb108;               Permissions: users-full
-Source: "modules\MariaDB-10.9\*";                                 DestDir: "{app}\modules\MariaDB-10.9";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb109;               Permissions: users-full
-Source: "modules\MariaDB-10.10\*";                                DestDir: "{app}\modules\MariaDB-10.10";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb1010;              Permissions: users-full
-Source: "modules\MariaDB-10.11\*";                                DestDir: "{app}\modules\MariaDB-10.11";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb1011;              Permissions: users-full
-Source: "modules\MariaDB-11.0\*";                                 DestDir: "{app}\modules\MariaDB-11.0";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb110;               Permissions: users-full
+Source: "modules\MySQL-5.5\*";                                    DestDir: "{app}\modules\MySQL-5.5";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mysql\mysql55;         Permissions: users-full
+Source: "modules\MySQL-5.6\*";                                    DestDir: "{app}\modules\MySQL-5.6";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql56;                   Permissions: users-full
+Source: "modules\MySQL-5.7\*";                                    DestDir: "{app}\modules\MySQL-5.7";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql57;                   Permissions: users-full
+Source: "modules\MySQL-8.0\*";                                    DestDir: "{app}\modules\MySQL-8.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql80;                   Permissions: users-full
 
-Source: "modules\PostgreSQL-9.5\*";                               DestDir: "{app}\modules\PostgreSQL-9.5";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: psql\postgresql95; Permissions: users-full
-Source: "modules\PostgreSQL-9.6\*";                               DestDir: "{app}\modules\PostgreSQL-9.6";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql96;            Permissions: users-full
-Source: "modules\PostgreSQL-10\*";                                DestDir: "{app}\modules\PostgreSQL-10";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql10;            Permissions: users-full
-Source: "modules\PostgreSQL-11\*";                                DestDir: "{app}\modules\PostgreSQL-11";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql11;            Permissions: users-full
-Source: "modules\PostgreSQL-12\*";                                DestDir: "{app}\modules\PostgreSQL-12";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql12;            Permissions: users-full
-Source: "modules\PostgreSQL-13\*";                                DestDir: "{app}\modules\PostgreSQL-13";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql13;            Permissions: users-full
-Source: "modules\PostgreSQL-14\*";                                DestDir: "{app}\modules\PostgreSQL-14";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql14;            Permissions: users-full
-Source: "modules\PostgreSQL-15\*";                                DestDir: "{app}\modules\PostgreSQL-15";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql15;            Permissions: users-full
+Source: "modules\MariaDB-10.1\*";                                 DestDir: "{app}\modules\MariaDB-10.1";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb101;              Permissions: users-full
+Source: "modules\MariaDB-10.2\*";                                 DestDir: "{app}\modules\MariaDB-10.2";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb102;              Permissions: users-full
+Source: "modules\MariaDB-10.3\*";                                 DestDir: "{app}\modules\MariaDB-10.3";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb103;              Permissions: users-full
+Source: "modules\MariaDB-10.4\*";                                 DestDir: "{app}\modules\MariaDB-10.4";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb104;              Permissions: users-full
+Source: "modules\MariaDB-10.5\*";                                 DestDir: "{app}\modules\MariaDB-10.5";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb105;              Permissions: users-full
+Source: "modules\MariaDB-10.6\*";                                 DestDir: "{app}\modules\MariaDB-10.6";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb106;              Permissions: users-full
+Source: "modules\MariaDB-10.7\*";                                 DestDir: "{app}\modules\MariaDB-10.7";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb107;              Permissions: users-full
+Source: "modules\MariaDB-10.8\*";                                 DestDir: "{app}\modules\MariaDB-10.8";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb108;              Permissions: users-full
+Source: "modules\MariaDB-10.9\*";                                 DestDir: "{app}\modules\MariaDB-10.9";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb109;              Permissions: users-full
+Source: "modules\MariaDB-10.10\*";                                DestDir: "{app}\modules\MariaDB-10.10";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb1010;             Permissions: users-full
+Source: "modules\MariaDB-10.11\*";                                DestDir: "{app}\modules\MariaDB-10.11";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb1011;             Permissions: users-full
+Source: "modules\MariaDB-11.0\*";                                 DestDir: "{app}\modules\MariaDB-11.0";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb110;              Permissions: users-full
 
-Source: "modules\MongoDB-3.0\*";                                  DestDir: "{app}\modules\MongoDB-3.0";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mongo\mongodb30;   Permissions: users-full
-Source: "modules\MongoDB-3.2\*";                                  DestDir: "{app}\modules\MongoDB-3.2";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb32;              Permissions: users-full
-Source: "modules\MongoDB-3.4\*";                                  DestDir: "{app}\modules\MongoDB-3.4";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb34;              Permissions: users-full
-Source: "modules\MongoDB-3.6\*";                                  DestDir: "{app}\modules\MongoDB-3.6";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb36;              Permissions: users-full
-Source: "modules\MongoDB-4.0\*";                                  DestDir: "{app}\modules\MongoDB-4.0";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb40;              Permissions: users-full
-Source: "modules\MongoDB-4.2\*";                                  DestDir: "{app}\modules\MongoDB-4.2";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb42;              Permissions: users-full
-Source: "modules\MongoDB-4.4\*";                                  DestDir: "{app}\modules\MongoDB-4.4";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb44;              Permissions: users-full
-Source: "modules\MongoDB-5.0\*";                                  DestDir: "{app}\modules\MongoDB-5.0";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb50;              Permissions: users-full
-Source: "modules\MongoDB-6.0\*";                                  DestDir: "{app}\modules\MongoDB-6.0";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mongo\mongodb60;              Permissions: users-full
+Source: "modules\PostgreSQL-9.5\*";                               DestDir: "{app}\modules\PostgreSQL-9.5";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: psql\postgresql95;     Permissions: users-full
+Source: "modules\PostgreSQL-9.6\*";                               DestDir: "{app}\modules\PostgreSQL-9.6";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql96;               Permissions: users-full
+Source: "modules\PostgreSQL-10\*";                                DestDir: "{app}\modules\PostgreSQL-10";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql10;               Permissions: users-full
+Source: "modules\PostgreSQL-11\*";                                DestDir: "{app}\modules\PostgreSQL-11";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql11;               Permissions: users-full
+Source: "modules\PostgreSQL-12\*";                                DestDir: "{app}\modules\PostgreSQL-12";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql12;               Permissions: users-full
+Source: "modules\PostgreSQL-13\*";                                DestDir: "{app}\modules\PostgreSQL-13";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql13;               Permissions: users-full
+Source: "modules\PostgreSQL-14\*";                                DestDir: "{app}\modules\PostgreSQL-14";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql14;               Permissions: users-full
+Source: "modules\PostgreSQL-15\*";                                DestDir: "{app}\modules\PostgreSQL-15";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql15;               Permissions: users-full
 
-Source: "modules\Memcached-1.4\*";                                DestDir: "{app}\modules\Memcached-1.4";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mem\memcached14;   Permissions: users-full
-Source: "modules\Memcached-1.6\*";                                DestDir: "{app}\modules\Memcached-1.6";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mem\memcached16;              Permissions: users-full
+Source: "modules\MongoDB-3.0\*";                                  DestDir: "{app}\modules\MongoDB-3.0";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mongodb\mongodb30;     Permissions: users-full
+Source: "modules\MongoDB-3.2\*";                                  DestDir: "{app}\modules\MongoDB-3.2";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb32;               Permissions: users-full
+Source: "modules\MongoDB-3.4\*";                                  DestDir: "{app}\modules\MongoDB-3.4";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb34;               Permissions: users-full
+Source: "modules\MongoDB-3.6\*";                                  DestDir: "{app}\modules\MongoDB-3.6";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb36;               Permissions: users-full
+Source: "modules\MongoDB-4.0\*";                                  DestDir: "{app}\modules\MongoDB-4.0";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb40;               Permissions: users-full
+Source: "modules\MongoDB-4.2\*";                                  DestDir: "{app}\modules\MongoDB-4.2";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb42;               Permissions: users-full
+Source: "modules\MongoDB-4.4\*";                                  DestDir: "{app}\modules\MongoDB-4.4";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb44;               Permissions: users-full
+Source: "modules\MongoDB-5.0\*";                                  DestDir: "{app}\modules\MongoDB-5.0";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb50;               Permissions: users-full
+Source: "modules\MongoDB-6.0\*";                                  DestDir: "{app}\modules\MongoDB-6.0";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb60;               Permissions: users-full
 
-Source: "modules\Redis-3.0\*";                                    DestDir: "{app}\modules\Redis-3.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: redis\redis30;                Permissions: users-full
-Source: "modules\Redis-3.2\*";                                    DestDir: "{app}\modules\Redis-3.2";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: redis\redis32;                Permissions: users-full
-Source: "modules\Redis-4.0\*";                                    DestDir: "{app}\modules\Redis-4.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: redis\redis40;                Permissions: users-full
-Source: "modules\Redis-5.0\*";                                    DestDir: "{app}\modules\Redis-5.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: redis\redis50;                Permissions: users-full
-Source: "modules\Redis-7.0\*";                                    DestDir: "{app}\modules\Redis-7.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: redis\redis70;                Permissions: users-full
+Source: "modules\Memcached-1.4\*";                                DestDir: "{app}\modules\Memcached-1.4";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: memcached\memcached14; Permissions: users-full
+Source: "modules\Memcached-1.6\*";                                DestDir: "{app}\modules\Memcached-1.6";         Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: memcached\memcached16;           Permissions: users-full
 
-Source: "modules\Bind\*";                                         DestDir: "{app}\modules\Bind";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: dns\bind;                     Permissions: users-full
-Source: "modules\Git\*";                                          DestDir: "{app}\modules\Git";              Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: git;                          Permissions: users-full
-Source: "modules\Unbound\*";                                      DestDir: "{app}\modules\Unbound";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: dns\unbound;                  Permissions: users-full
+Source: "modules\Redis-3.0\*";                                    DestDir: "{app}\modules\Redis-3.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis30;                   Permissions: users-full
+Source: "modules\Redis-3.2\*";                                    DestDir: "{app}\modules\Redis-3.2";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis32;                   Permissions: users-full
+Source: "modules\Redis-4.0\*";                                    DestDir: "{app}\modules\Redis-4.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis40;                   Permissions: users-full
+Source: "modules\Redis-5.0\*";                                    DestDir: "{app}\modules\Redis-5.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis50;                   Permissions: users-full
+Source: "modules\Redis-7.0\*";                                    DestDir: "{app}\modules\Redis-7.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
 
-Source: "data\PHP-7.1\*";                                         DestDir: "{app}\data\PHP-7.1";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: php\php71;         Permissions: users-full
-Source: "data\PHP-7.2\*";                                         DestDir: "{app}\data\PHP-7.2";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php72;                    Permissions: users-full
-Source: "data\PHP-7.3\*";                                         DestDir: "{app}\data\PHP-7.3";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php73;                    Permissions: users-full
-Source: "data\PHP-7.4\*";                                         DestDir: "{app}\data\PHP-7.4";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php74;                    Permissions: users-full
-Source: "data\PHP-8.0\*";                                         DestDir: "{app}\data\PHP-8.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php80;                    Permissions: users-full
-Source: "data\PHP-8.1\*";                                         DestDir: "{app}\data\PHP-8.1";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php81;                    Permissions: users-full
-Source: "data\PHP-8.2\*";                                         DestDir: "{app}\data\PHP-8.2";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: php\php82;                    Permissions: users-full
+Source: "modules\Bind\*";                                         DestDir: "{app}\modules\Bind";                  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
+Source: "modules\Git\*";                                          DestDir: "{app}\modules\Git";                   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: git;                             Permissions: users-full
+Source: "modules\Unbound\*";                                      DestDir: "{app}\modules\Unbound";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
 
-Source: "data\Bind\*";                                            DestDir: "{app}\data\Bind";                Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: dns\bind;                     Permissions: users-full
-Source: "data\Unbound\*";                                         DestDir: "{app}\data\Unbound";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: dns\unbound;                  Permissions: users-full
+Source: "modules\ControlPanel\ospanel_data\default\*";            DestDir: "{app}\config\ControlPanel\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: core\panel;            Permissions: users-full
+Source: "modules\Perl\ospanel_data\default\*";                    DestDir: "{app}\config\Perl\default";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
 
-Source: "data\MySQL-5.5\*";                                       DestDir: "{app}\data\MySQL-5.5";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: db\mysql55;        Permissions: users-full
-Source: "data\MySQL-5.6\*";                                       DestDir: "{app}\data\MySQL-5.6";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql56;                   Permissions: users-full
-Source: "data\MySQL-5.7\*";                                       DestDir: "{app}\data\MySQL-5.7";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql57;                   Permissions: users-full
-Source: "data\MySQL-8.0\*";                                       DestDir: "{app}\data\MySQL-8.0";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: db\mysql80;                   Permissions: users-full
+Source: "modules\PHP-7.1\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-7.1\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: php\php71;             Permissions: users-full
+Source: "modules\PHP-7.2\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-7.2\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php72;                       Permissions: users-full
+Source: "modules\PHP-7.3\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-7.3\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php73;                       Permissions: users-full
+Source: "modules\PHP-7.4\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-7.4\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php74;                       Permissions: users-full
+Source: "modules\PHP-8.0\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-8.0\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php80;                       Permissions: users-full
+Source: "modules\PHP-8.1\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-8.1\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php81;                       Permissions: users-full
+Source: "modules\PHP-8.2\ospanel_data\default\*";                 DestDir: "{app}\config\PHP-8.2\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: php\php82;                       Permissions: users-full
 
-Source: "data\MariaDB-10.1\*";                                    DestDir: "{app}\data\MariaDB-10.1";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb101;               Permissions: users-full
-Source: "data\MariaDB-10.2\*";                                    DestDir: "{app}\data\MariaDB-10.2";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb102;               Permissions: users-full
-Source: "data\MariaDB-10.3\*";                                    DestDir: "{app}\data\MariaDB-10.3";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb103;               Permissions: users-full
-Source: "data\MariaDB-10.4\*";                                    DestDir: "{app}\data\MariaDB-10.4";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb104;               Permissions: users-full
-Source: "data\MariaDB-10.5\*";                                    DestDir: "{app}\data\MariaDB-10.5";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb105;               Permissions: users-full
-Source: "data\MariaDB-10.6\*";                                    DestDir: "{app}\data\MariaDB-10.6";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb106;               Permissions: users-full
-Source: "data\MariaDB-10.7\*";                                    DestDir: "{app}\data\MariaDB-10.7";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb107;               Permissions: users-full
-Source: "data\MariaDB-10.8\*";                                    DestDir: "{app}\data\MariaDB-10.8";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb108;               Permissions: users-full
-Source: "data\MariaDB-10.9\*";                                    DestDir: "{app}\data\MariaDB-10.9";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb109;               Permissions: users-full
-Source: "data\MariaDB-10.10\*";                                   DestDir: "{app}\data\MariaDB-10.10";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb1010;              Permissions: users-full
-Source: "data\MariaDB-10.11\*";                                   DestDir: "{app}\data\MariaDB-10.11";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb1011;              Permissions: users-full
-Source: "data\MariaDB-11.0\*";                                    DestDir: "{app}\data\MariaDB-11.0";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: mdb\mariadb110;               Permissions: users-full
+Source: "modules\MySQL-5.5\ospanel_data\default\*";               DestDir: "{app}\config\MySQL-5.5\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mysql\mysql55;         Permissions: users-full
+Source: "modules\MySQL-5.6\ospanel_data\default\*";               DestDir: "{app}\config\MySQL-5.6\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql56;                   Permissions: users-full
+Source: "modules\MySQL-5.7\ospanel_data\default\*";               DestDir: "{app}\config\MySQL-5.7\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql57;                   Permissions: users-full
+Source: "modules\MySQL-8.0\ospanel_data\default\*";               DestDir: "{app}\config\MySQL-8.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mysql\mysql80;                   Permissions: users-full
 
-Source: "data\PostgreSQL-9.5\*";                                  DestDir: "{app}\data\PostgreSQL-9.5";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: psql\postgresql95; Permissions: users-full
-Source: "data\PostgreSQL-9.6\*";                                  DestDir: "{app}\data\PostgreSQL-9.6";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql96;            Permissions: users-full
-Source: "data\PostgreSQL-10\*";                                   DestDir: "{app}\data\PostgreSQL-10";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql10;            Permissions: users-full
-Source: "data\PostgreSQL-11\*";                                   DestDir: "{app}\data\PostgreSQL-11";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql11;            Permissions: users-full
-Source: "data\PostgreSQL-12\*";                                   DestDir: "{app}\data\PostgreSQL-12";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql12;            Permissions: users-full
-Source: "data\PostgreSQL-13\*";                                   DestDir: "{app}\data\PostgreSQL-13";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql13;            Permissions: users-full
-Source: "data\PostgreSQL-14\*";                                   DestDir: "{app}\data\PostgreSQL-14";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql14;            Permissions: users-full
-Source: "data\PostgreSQL-15\*";                                   DestDir: "{app}\data\PostgreSQL-15";       Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite; Components: psql\postgresql15;            Permissions: users-full
+Source: "modules\MariaDB-10.1\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.1\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb101;              Permissions: users-full
+Source: "modules\MariaDB-10.2\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.2\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb102;              Permissions: users-full
+Source: "modules\MariaDB-10.3\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.3\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb103;              Permissions: users-full
+Source: "modules\MariaDB-10.4\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.4\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb104;              Permissions: users-full
+Source: "modules\MariaDB-10.5\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.5\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb105;              Permissions: users-full
+Source: "modules\MariaDB-10.6\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.6\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb106;              Permissions: users-full
+Source: "modules\MariaDB-10.7\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.7\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb107;              Permissions: users-full
+Source: "modules\MariaDB-10.8\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.8\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb108;              Permissions: users-full
+Source: "modules\MariaDB-10.9\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-10.9\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb109;              Permissions: users-full
+Source: "modules\MariaDB-10.10\ospanel_data\default\*";           DestDir: "{app}\config\MariaDB-10.10\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb1010;             Permissions: users-full
+Source: "modules\MariaDB-10.11\ospanel_data\default\*";           DestDir: "{app}\config\MariaDB-10.11\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb1011;             Permissions: users-full
+Source: "modules\MariaDB-11.0\ospanel_data\default\*";            DestDir: "{app}\config\MariaDB-11.0\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mariadb\mariadb110;              Permissions: users-full
+
+Source: "modules\PostgreSQL-9.5\ospanel_data\default\*";          DestDir: "{app}\config\PostgreSQL-9.5\default"; Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: psql\postgresql95;     Permissions: users-full
+Source: "modules\PostgreSQL-9.6\ospanel_data\default\*";          DestDir: "{app}\config\PostgreSQL-9.6\default"; Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql96;               Permissions: users-full
+Source: "modules\PostgreSQL-10\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-10\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql10;               Permissions: users-full
+Source: "modules\PostgreSQL-11\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-11\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql11;               Permissions: users-full
+Source: "modules\PostgreSQL-12\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-12\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql12;               Permissions: users-full
+Source: "modules\PostgreSQL-13\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-13\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql13;               Permissions: users-full
+Source: "modules\PostgreSQL-14\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-14\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql14;               Permissions: users-full
+Source: "modules\PostgreSQL-15\ospanel_data\default\*";           DestDir: "{app}\config\PostgreSQL-15\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: psql\postgresql15;               Permissions: users-full
+
+Source: "modules\MongoDB-3.0\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-3.0\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: mongodb\mongodb30;     Permissions: users-full
+Source: "modules\MongoDB-3.2\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-3.2\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb32;               Permissions: users-full
+Source: "modules\MongoDB-3.4\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-3.4\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb34;               Permissions: users-full
+Source: "modules\MongoDB-3.6\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-3.6\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb36;               Permissions: users-full
+Source: "modules\MongoDB-4.0\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-4.0\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb40;               Permissions: users-full
+Source: "modules\MongoDB-4.2\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-4.2\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb42;               Permissions: users-full
+Source: "modules\MongoDB-4.4\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-4.4\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb44;               Permissions: users-full
+Source: "modules\MongoDB-5.0\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-5.0\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb50;               Permissions: users-full
+Source: "modules\MongoDB-6.0\ospanel_data\default\*";             DestDir: "{app}\config\MongoDB-6.0\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: mongodb\mongodb60;               Permissions: users-full
+
+Source: "modules\Memcached-1.4\ospanel_data\default\*";           DestDir: "{app}\config\Memcached-1.4\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: memcached\memcached14; Permissions: users-full
+Source: "modules\Memcached-1.6\ospanel_data\default\*";           DestDir: "{app}\config\Memcached-1.6\default";  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: memcached\memcached16;           Permissions: users-full
+
+Source: "modules\Redis-3.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-3.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis30;                   Permissions: users-full
+Source: "modules\Redis-3.2\ospanel_data\default\*";               DestDir: "{app}\config\Redis-3.2\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis32;                   Permissions: users-full
+Source: "modules\Redis-4.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-4.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis40;                   Permissions: users-full
+Source: "modules\Redis-5.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-5.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis50;                   Permissions: users-full
+Source: "modules\Redis-7.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-7.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
+
+Source: "modules\Bind\ospanel_data\default\*";                    DestDir: "{app}\config\Bind\default";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
+Source: "modules\Git\ospanel_data\default\*";                     DestDir: "{app}\config\Git\default";            Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: git;                             Permissions: users-full
+Source: "modules\Unbound\ospanel_data\default\*";                 DestDir: "{app}\config\Unbound\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
+
+Source: "modules\PHP-7.1\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-7.1\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite solidbreak; Components: php\php71;          Permissions: users-full
+Source: "modules\PHP-7.2\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-7.2\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php72;                    Permissions: users-full
+Source: "modules\PHP-7.3\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-7.3\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php73;                    Permissions: users-full
+Source: "modules\PHP-7.4\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-7.4\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php74;                    Permissions: users-full
+Source: "modules\PHP-8.0\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-8.0\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php80;                    Permissions: users-full
+Source: "modules\PHP-8.1\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-8.1\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php81;                    Permissions: users-full
+Source: "modules\PHP-8.2\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-8.2\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: php\php82;                    Permissions: users-full
+
+Source: "modules\Bind\ospanel_data\default_data\*";               DestDir: "{app}\data\Bind\default";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: dns\bind;                     Permissions: users-full
+Source: "modules\Unbound\ospanel_data\default_data\*";            DestDir: "{app}\data\Unbound\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: dns\unbound;                  Permissions: users-full
+
+Source: "modules\MySQL-5.5\ospanel_data\default_data\*";          DestDir: "{app}\data\MySQL-5.5\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite solidbreak; Components: mysql\mysql55;      Permissions: users-full
+Source: "modules\MySQL-5.6\ospanel_data\default_data\*";          DestDir: "{app}\data\MySQL-5.6\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mysql\mysql56;                Permissions: users-full
+Source: "modules\MySQL-5.7\ospanel_data\default_data\*";          DestDir: "{app}\data\MySQL-5.7\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mysql\mysql57;                Permissions: users-full
+Source: "modules\MySQL-8.0\ospanel_data\default_data\*";          DestDir: "{app}\data\MySQL-8.0\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mysql\mysql80;                Permissions: users-full
+
+Source: "modules\MariaDB-10.1\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.1\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb101;           Permissions: users-full
+Source: "modules\MariaDB-10.2\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.2\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb102;           Permissions: users-full
+Source: "modules\MariaDB-10.3\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.3\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb103;           Permissions: users-full
+Source: "modules\MariaDB-10.4\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.4\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb104;           Permissions: users-full
+Source: "modules\MariaDB-10.5\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.5\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb105;           Permissions: users-full
+Source: "modules\MariaDB-10.6\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.6\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb106;           Permissions: users-full
+Source: "modules\MariaDB-10.7\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.7\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb107;           Permissions: users-full
+Source: "modules\MariaDB-10.8\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.8\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb108;           Permissions: users-full
+Source: "modules\MariaDB-10.9\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-10.9\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb109;           Permissions: users-full
+Source: "modules\MariaDB-10.10\ospanel_data\default_data\*";      DestDir: "{app}\data\MariaDB-10.10\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb1010;          Permissions: users-full
+Source: "modules\MariaDB-10.11\ospanel_data\default_data\*";      DestDir: "{app}\data\MariaDB-10.11\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb1011;          Permissions: users-full
+Source: "modules\MariaDB-11.0\ospanel_data\default_data\*";       DestDir: "{app}\data\MariaDB-11.0\default";     Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: mariadb\mariadb110;           Permissions: users-full
+
+Source: "modules\PostgreSQL-9.5\ospanel_data\default_data\*";     DestDir: "{app}\data\PostgreSQL-9.5\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite solidbreak; Components: psql\postgresql95;  Permissions: users-full
+Source: "modules\PostgreSQL-9.6\ospanel_data\default_data\*";     DestDir: "{app}\data\PostgreSQL-9.6\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql96;            Permissions: users-full
+Source: "modules\PostgreSQL-10\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-10\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql10;            Permissions: users-full
+Source: "modules\PostgreSQL-11\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-11\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql11;            Permissions: users-full
+Source: "modules\PostgreSQL-12\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-12\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql12;            Permissions: users-full
+Source: "modules\PostgreSQL-13\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-13\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql13;            Permissions: users-full
+Source: "modules\PostgreSQL-14\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-14\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql14;            Permissions: users-full
+Source: "modules\PostgreSQL-15\ospanel_data\default_data\*";      DestDir: "{app}\data\PostgreSQL-15\default";    Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite;  Components: psql\postgresql15;            Permissions: users-full
 
 [Run]
 
@@ -289,8 +355,28 @@ Filename: "{app}\system\ssl\gen_root_cert.bat"; WorkingDir: "{app}\system\ssl"; 
 Filename: "{app}\system\ssl\add_root_to_certstore.bat"; WorkingDir: "{app}\system\ssl"; StatusMsg: "{cm:ImportingCert}"; Flags: runhidden waituntilterminated skipifdoesntexist skipifsilent; Tasks: import_cert
 Filename: "{app}\system\bin\syspreptool.exe"; Description: "{cm:RunSysPrep}"; Flags: postinstall nowait skipifdoesntexist skipifsilent; Components: core\panel
 
+[UninstallRun]
+
+Filename: "{app}\system\ssl\del_root_from_certstore.bat"; WorkingDir: "{app}\system\ssl"; Flags: runhidden waituntilterminated skipifdoesntexist
+
+[UninstallDelete]
+
+Type: filesandordirs; Name: "{app}\bin"
+Type: filesandordirs; Name: "{app}\config"
+Type: filesandordirs; Name: "{app}\licenses"
+Type: filesandordirs; Name: "{app}\modules"
+Type: filesandordirs; Name: "{app}\logs"
+Type: filesandordirs; Name: "{app}\system"
+Type: filesandordirs; Name: "{app}\temp"
+Type: filesandordirs; Name: "{app}\user"
+Type: dirifempty;     Name: "{app}"
+
 [Code]
 
+var
+  ModePage: TInputOptionWizardPage;
+  APPInstallMode: Boolean;
+             
 function GetDriveType(lpRootPathName: string): UInt;
   external 'GetDriveTypeW@kernel32.dll stdcall';
 
@@ -357,24 +443,29 @@ begin
 		old_path := Copy(old_path, Pos(';', old_path)+1, Length(old_path));
 		i := i + 1;
 
-		if add_path = path_arr[i-1] then begin
-  		if IsUninstaller() = true then begin
-				continue;
-  		end else begin
+		if add_path = path_arr[i-1] then
+  		if IsUninstaller() = true then
+				continue
+  		else
 				update_path := false;
-	    end;
-		end;
 
-		if i = 1 then begin
-			final_path := path_arr[i-1];
-		end else begin
-			final_path := final_path + ';' + path_arr[i-1];
-		end;
+    if path_arr[i-1] <> '' then
+		  if i = 1 then
+			  final_path := path_arr[i-1]
+		  else
+        if final_path <> '' then
+			    final_path := final_path + ';' + path_arr[i-1]
+        else
+          final_path := path_arr[i-1]; 
 	end;
 
-	if (IsUninstaller() = false) AND (update_path = true) then
-		final_path := add_path + ';' + final_path;
+	if (IsUninstaller() = false) and (update_path = true) and (add_path <> '') then
+    if final_path <> '' then
+		  final_path := add_path + ';' + final_path
+    else
+      final_path := add_path;
 
+  StringChangeEx(final_path, ';;', ';', True);
 	RegWriteStringValue(reg_root, reg_path, 'Path', final_path);
 end; 
 
@@ -403,20 +494,88 @@ begin
     begin
       SetLength(Result, Pos(#0, Result) - 1);
       Result := trim(AnsiLowerCase( Result ));
-    end else Result := '';
+    end else
+      Result := '';
 end; 
 
 procedure InitializeWizard();
 begin
   WizardForm.WelcomeLabel1.Font.Style := [];
+  ModePage :=
+    CreateInputOptionPage(
+      wpLicense, ExpandConstant('{cm:InstallationMode}'), ExpandConstant('{cm:InstallationModeDescr}'), ExpandConstant('{cm:NormalInstallationDescr}') + #13#10#13#10 +
+    ExpandConstant('{cm:PortableInstallationDescr}'), True, False);
+  ModePage.Add(ExpandConstant('{cm:NormalInstallation}'));
+  ModePage.Add(ExpandConstant('{cm:PortableInstallation}'));
+  ModePage.Values[0] := True;
 end; 
 
-procedure CurPageChanged(CurPageID: Integer);
+function IsUninstallable: Boolean;
 begin
-  if CurPageID = wpFinished then
+  APPInstallMode := ModePage.Values[0];
+  Result := APPInstallMode;
+end;
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := False;
+
+  if PageID = wpSelectProgramGroup then
   begin
-    WizardForm.FinishedHeadingLabel.Font.Style := [];
+    Result := not IsUninstallable;
+    if not Result then
+    Result := not WizardIsComponentSelected('core\panel');
   end;
+end;
+
+procedure CurPageChanged(CurPageID: Integer);
+var
+strExistingInstallPath: String;
+begin
+  if CurPageID = wpSelectDir then
+  begin
+    APPInstallMode := ModePage.Values[0];
+    strExistingInstallPath := '';   
+    if not APPInstallMode then WizardForm.NoIconsCheck.Checked := true else 
+    WizardForm.NoIconsCheck.Checked := false;
+
+    if RegKeyExists(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#AppTitle} {#AppVersion}_is1') then
+      if RegValueExists(HKEY_CURRENT_USER, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#AppTitle} {#AppVersion}_is1', 'InstallLocation') then
+        if not RegQueryStringValue(HKCU, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#AppTitle} {#AppVersion}_is1','InstallLocation', strExistingInstallPath) then strExistingInstallPath := '';
+     
+    if APPInstallMode then begin       
+      if strExistingInstallPath <> '' then begin
+        WizardForm.DirEdit.Text := strExistingInstallPath;
+        WizardForm.DirEdit.Enabled := False;
+        WizardForm.DirBrowseButton.Enabled := False;
+      end else begin
+        WizardForm.DirEdit.Enabled := true;
+        WizardForm.DirBrowseButton.Enabled := true;
+      end;
+    end 
+    else 
+    begin 
+        WizardForm.DirEdit.Enabled := true;
+        WizardForm.DirBrowseButton.Enabled := true;
+    end;
+  end;
+
+  if CurPageID = wpSelectTasks then
+    begin   
+        APPInstallMode := ModePage.Values[0];
+        if not APPInstallMode then
+        begin
+            WizardForm.TasksList.Checked[0] := false;  
+            WizardForm.TasksList.Checked[1] := false;
+            WizardForm.TasksList.Checked[2] := false;
+            WizardForm.TasksList.ItemEnabled[0] := false;  
+            WizardForm.TasksList.ItemEnabled[1] := false;
+            WizardForm.TasksList.ItemEnabled[2] := false;
+        end;
+  end;
+
+  if CurPageID = wpFinished then
+    WizardForm.FinishedHeadingLabel.Font.Style := [];
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
@@ -429,6 +588,7 @@ begin
   if CurPageID = wpSelectDir then
   begin
     Dir := WizardForm.DirEdit.Text;
+
     if not IsPathValid(Dir) then
     begin
       Msg := ExpandConstant('{cm:PathCheckError}');
@@ -436,6 +596,7 @@ begin
         else MsgBox(Msg, mbError, MB_OK);
       Result := False;
     end;
+   
     if IO_GetPartitionType(Dir) <> 'ntfs' then
     begin
       Msg := ExpandConstant('{cm:PartitionTypeError}');
@@ -443,7 +604,9 @@ begin
         else MsgBox(Msg, mbError, MB_OK);
       Result := False;
     end;
+   
     dtype := IO_GetDiskType(Dir);
+    
     if ( dtype <> 2 ) and ( dtype <> 3 ) and ( dtype <> 6 ) then
     begin
       Msg := ExpandConstant('{cm:DiskTypeError}');
@@ -459,6 +622,36 @@ begin
 	if CurStep = ssPostInstall then
 		if WizardIsTaskSelected('add_to_path') then
 			AddTo_Path();
+end;
+
+function InitializeUninstall(): Boolean;
+begin
+  // Default to OK
+  result := true;
+
+  // If it's in silent mode, exit
+  if UninstallSilent() then
+  begin
+    MsgBox('This setup doesn''t support silent uninstallation.', mbInformation, MB_OK);
+    result := false;
+  end;
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep = usPostUninstall then
+  begin
+    if not UninstallSilent then begin
+      if DirExists(ExpandConstant('{app}\data')) then 
+        if MsgBox(ExpandConstant('{cm:WantToDeleteDataFolder}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDNO then
+            DelTree(ExpandConstant('{app}\data'), True, True, True); 
+
+      if DirExists(ExpandConstant('{app}\home')) then 
+        if MsgBox(ExpandConstant('{cm:WantToDeleteHomeFolder}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDNO then
+          DelTree(ExpandConstant('{app}\home'), True, True, True);
+    end;
+    AddTo_Path();
+  end;
 end;
 
 function IsWindowsVersionOrNewer(Major, Minor: Integer): Boolean;
