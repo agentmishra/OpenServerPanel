@@ -544,7 +544,7 @@ begin
         if not RegQueryStringValue(HKCU, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{#AppTitle} {#AppVersion}_is1','InstallLocation', strExistingInstallPath) then strExistingInstallPath := '';
      
     if APPInstallMode then begin       
-      if strExistingInstallPath <> '' then begin
+      if (strExistingInstallPath <> '') and DirExists(strExistingInstallPath) then begin
         WizardForm.DirEdit.Text := strExistingInstallPath;
         WizardForm.DirEdit.Enabled := False;
         WizardForm.DirBrowseButton.Enabled := False;
