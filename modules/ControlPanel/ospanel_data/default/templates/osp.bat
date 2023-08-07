@@ -49,7 +49,7 @@ if /i "%1"=="reset"       goto env_windows
 if /i "%1"=="restart"     goto mod_cmd
 if /i "%1"=="use"         goto env_set
 if /i "%1"=="shell"       goto mod_shell
-if /i "%1"=="ssl"         goto initssl
+if /i "%1"=="cacert"      goto cacertinit
 if /i "%1"=="status"      goto mod_cmd
 if /i "%1"=="sysprep"     goto sysprep
 if /i "%1"=="-v"          echo: & echo {lang_version_info}: Open Server Panel v{osp_version} x64 {osp_version_datetime} & goto end
@@ -105,13 +105,13 @@ echo status  ^<MODULE^>            {lang_show_mod_status}
 echo:
 echo {lang_other_commands}:
 echo:
+echo cacert  ^<init^|show^|deinit^>  {lang_gen_and_install_root_cert}
+echo                             {lang_about_gen_root_cert}
 echo convert ^<DOMAIN^>            {lang_convert_from_to_punycode}
 echo domains                     {lang_show_info_about_domains}
 echo exit                        {lang_shutting_down_program}
 echo log     ^<MODULE^|main^>  [N]  {lang_show_log}
 echo modules                     {lang_show_mod_info}
-echo ssl     ^<init^|deinit^>       {lang_gen_and_install_root_cert}
-echo                             {lang_about_gen_root_cert}
 echo sysprep [silent^|ssd]        {lang_launch_sp_tool}
 echo                             {lang_silent_flag}
 echo                             {lang_ssd_flag}
@@ -145,11 +145,12 @@ if exist "{root_dir}\temp\OSPanel.lock" goto error
 echo: & echo {lang_exiting_program}
 goto end
 :: -----------------------------------------------------------------------------------
-:: INIT SSL
+:: INIT CACERT
 :: -----------------------------------------------------------------------------------
-:initssl
+:cacertinit
 if "%2"=="" goto eargument
-if /i "%2"=="deinit" goto deinitssl
+if /i "%2"=="show" "%SystemRoot%\System32\certutil.exe" -user -store "Root" "Open Server Panel" & goto end
+if /i "%2"=="deinit" goto cacertdeinit
 if not exist "{root_dir}\system\ssl\gen_root_cert.bat" set "OSP_ERR_MSG={root_dir}\system\ssl\gen_root_cert.bat {lang_err_not_found}" & goto error
 if exist "{root_dir}\data\ssl\root\cert.crt" del /Q "{root_dir}\data\ssl\root\cert.crt"
 "%SystemRoot%\System32\certutil.exe" -user -delstore "Root" "Open Server Panel"
@@ -160,9 +161,9 @@ if not exist "{root_dir}\data\ssl\root\cert.crt" set "OSP_ERR_MSG={lang_err_fail
 "%SystemRoot%\System32\certutil.exe" -urlcache * delete > nul 2> nul
 goto end
 :: -----------------------------------------------------------------------------------
-:: DEINIT SSL
+:: DEINIT CACERT
 :: -----------------------------------------------------------------------------------
-:deinitssl
+:cacertdeinit
 if exist "{root_dir}\data\ssl\root\cert.crt" del /Q "{root_dir}\data\ssl\root\cert.crt"
 "%SystemRoot%\System32\certutil.exe" -user -delstore "Root" "Open Server Panel"
 "%SystemRoot%\System32\certutil.exe" -urlcache * delete > nul 2> nul
@@ -407,8 +408,8 @@ if /i not "%1"=="shell" TITLE %OSP_ACTIVE_ENV% ^| Open Server Panel
 @echo %ESC%[91m{lang_error}
 @echo ————————————————————————————————————————————————————
 @echo {lang_command}: osp %1 %2 %3
-@echo {lang_reason}: {lang_err_osp_must_be_started}
-@echo {lang_message}: {lang_err_failed_exec_command}%ESC%[0m
+@echo {lang_message}: {lang_err_failed_exec_command}
+@echo {lang_reason}: {lang_err_osp_must_be_started}%ESC%[0m
 @if defined OSP_CODEPAGE @chcp %OSP_CODEPAGE% > nul
 @set "OSP_CODEPAGE="
 @exit /b 1
@@ -427,7 +428,9 @@ if /i not "%1"=="shell" TITLE %OSP_ACTIVE_ENV% ^| Open Server Panel
 @echo %ESC%[91m{lang_error}
 @echo ————————————————————————————————————————————————————
 @echo {lang_command}: osp %1 %2 %3
-@if defined OSP_ERR_MSG @echo {lang_reason}: %OSP_ERR_MSG%
-@echo {lang_message}: {lang_err_failed_exec_command}%ESC%[0m
+@echo
+@if not defined OSP_ERR_MSG @echo {lang_message}: {lang_err_failed_exec_command}%ESC%[0m
+@if defined OSP_ERR_MSG @echo {lang_message}: {lang_err_failed_exec_command}
+@if defined OSP_ERR_MSG @echo {lang_reason}: %OSP_ERR_MSG%%ESC%[0m
 @call :before_exit
 @exit /b 1
