@@ -125,10 +125,10 @@ echo {lang_usage_examples}:
 echo:
 echo osp exit ^& ospanel          {lang_restarting_program}
 echo osp use PostgreSQL-9.6      {lang_using_postgresql}
-echo osp on bind myprofile       {lang_enabling_bind}
+echo osp on PHP-8.1 myprofile       {lang_enabling_php}
 echo osp restart mysql-8.0       {lang_restarting_mysql}
 echo osp log main 20             {lang_show_last_20_lines}
-echo osp reset ^& osp add git     {lang_combining_with_git}
+echo osp reset ^& osp add perl    {lang_combining_with_perl}
 goto end
 :: -----------------------------------------------------------------------------------
 :: SHUTTING DOWN THE APPLICATION
