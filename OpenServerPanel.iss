@@ -1,5 +1,5 @@
-#define AppVersion      "6.0.0.510"
-#define AppVersion_     "6_0_0_510"
+#define AppVersion      "6.0.0.523"
+#define AppVersion_     "6_0_0_523"
 #define AppDomain       "ospanel.io"
 #define AppTitle        "Open Server Panel"
 #define CurrentYear     GetDateTimeString('yyyy', '', '')
@@ -104,8 +104,6 @@ Name: "core\geobases";         Description: "{cm:Geobases}";      Types: full;  
 Name: "dns";                   Description: "DNS";                                                                Flags: disablenouninstallwarning
 Name: "dns\bind";              Description: "Bind";               Types: full;                                    Flags: disablenouninstallwarning; check: IsWindows10OrNewer;  
 Name: "dns\unbound";           Description: "Unbound";            Types: full;                                    Flags: disablenouninstallwarning
-
-Name: "git";                   Description: "Git";                Types: full;                                    Flags: disablenouninstallwarning
 
 Name: "mariadb";               Description: "MariaDB";                                                            Flags: disablenouninstallwarning
 Name: "mariadb\mariadb101";    Description: "MariaDB 10.1";       Types: full;                                    Flags: disablenouninstallwarning
@@ -247,7 +245,6 @@ Source: "modules\Redis-5.0\*";                                    DestDir: "{app
 Source: "modules\Redis-7.0\*";                                    DestDir: "{app}\modules\Redis-7.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
 
 Source: "modules\Bind\*";                                         DestDir: "{app}\modules\Bind";                  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
-Source: "modules\Git\*";                                          DestDir: "{app}\modules\Git";                   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: git;                             Permissions: users-full
 Source: "modules\Unbound\*";                                      DestDir: "{app}\modules\Unbound";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
 
 Source: "modules\ControlPanel\ospanel_data\default\*";            DestDir: "{app}\config\ControlPanel\default";   Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite solidbreak; Components: core\panel;            Permissions: users-full
@@ -308,7 +305,6 @@ Source: "modules\Redis-5.0\ospanel_data\default\*";               DestDir: "{app
 Source: "modules\Redis-7.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-7.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
 
 Source: "modules\Bind\ospanel_data\default\*";                    DestDir: "{app}\config\Bind\default";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
-Source: "modules\Git\ospanel_data\default\*";                     DestDir: "{app}\config\Git\default";            Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: git;                             Permissions: users-full
 Source: "modules\Unbound\ospanel_data\default\*";                 DestDir: "{app}\config\Unbound\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
 
 Source: "modules\PHP-7.1\ospanel_data\default_data\*";            DestDir: "{app}\data\PHP-7.1\default";          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite solidbreak; Components: php\php71;          Permissions: users-full
