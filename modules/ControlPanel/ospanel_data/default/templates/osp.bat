@@ -428,7 +428,6 @@ if /i not "%1"=="shell" TITLE %OSP_ACTIVE_ENV% ^| Open Server Panel
 @echo %ESC%[91m{lang_error}
 @echo ————————————————————————————————————————————————————
 @echo {lang_command}: osp %1 %2 %3
-@echo
 @if not defined OSP_ERR_MSG @echo {lang_message}: {lang_err_failed_exec_command}%ESC%[0m
 @if defined OSP_ERR_MSG @echo {lang_message}: {lang_err_failed_exec_command}
 @if defined OSP_ERR_MSG @echo {lang_reason}: %OSP_ERR_MSG%%ESC%[0m
