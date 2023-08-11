@@ -26,19 +26,19 @@ mkdir "%OSP_ROOT_DIR%generate\new_data\%1\default"
 cd /d "%OSP_ROOT_DIR%modules\%1"
 copy my.ini my-default.ini
 copy my.ini my_print_defaults.ini
-call mysql_install_db --datadir="%OSP_ROOT_DIR%data\%1\default" --allow-remote-root-access -o
+mysql_install_db --datadir="%OSP_ROOT_DIR%data\%1\default" --allow-remote-root-access -o
 timeout /t 3 /nobreak > nul
 del "%OSP_ROOT_DIR%modules\%1\*.ini" /q 2>nul
 call osp on %1
 timeout /t 5 /nobreak > nul
-if "%1"=="MariaDB-10.7" call mysql --protocol=PIPE --socket=%1 --host="" -u root mysql < "%OSP_ROOT_DIR%generate\setup\timezone_posix.sql"
-if not "%1"=="MariaDB-10.7" call mysql --protocol=PIPE --socket=%1 -u root mysql < "%OSP_ROOT_DIR%generate\setup\timezone_posix.sql"
+if "%1"=="MariaDB-10.7" mysql --protocol=PIPE --socket=%1 --host="" -u root mysql < "%OSP_ROOT_DIR%generate\setup\timezone_posix.sql"
+if not "%1"=="MariaDB-10.7" mysql --protocol=PIPE --socket=%1 -u root mysql < "%OSP_ROOT_DIR%generate\setup\timezone_posix.sql"
 timeout /t 3 /nobreak > nul
 call osp restart %1 default
 call osp use %1
 timeout /t 5 /nobreak > nul
-if "%1"=="MariaDB-10.7" call mysql --force --protocol=PIPE --socket=%1 --host="" -u root mysql < "%OSP_ROOT_DIR%generate\setup\install.sql"
-if not "%1"=="MariaDB-10.7" call mysql --force --protocol=PIPE --socket=%1 -u root mysql < "%OSP_ROOT_DIR%generate\setup\install.sql"
+if "%1"=="MariaDB-10.7" mysql --force --protocol=PIPE --socket=%1 --host="" -u root mysql < "%OSP_ROOT_DIR%generate\setup\install.sql"
+if not "%1"=="MariaDB-10.7" mysql --force --protocol=PIPE --socket=%1 -u root mysql < "%OSP_ROOT_DIR%generate\setup\install.sql"
 call osp off %1
 timeout /t 3 /nobreak > nul
 del "%OSP_ROOT_DIR%data\%1\default\*.ini" /q 2>nul
