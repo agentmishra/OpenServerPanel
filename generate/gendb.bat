@@ -27,12 +27,12 @@ goto end
 call osp off %1
 call osp init %1 default
 call osp use %1
-rd "%OSP_ROOT_DIR%data\%1" /s /q 2>nul
-mkdir "%OSP_ROOT_DIR%data\%1"
-mkdir "%OSP_ROOT_DIR%generate\new_data\%1"
-call initdb --data-checksums --no-locale -U postgres --encoding=UTF8 -D "%OSP_ROOT_DIR%data\%1"
-del "%OSP_ROOT_DIR%data\%1\pg_hba.conf" "%OSP_ROOT_DIR%data\%1\postgresql.conf"
-robocopy "%OSP_ROOT_DIR%data\%1" "%OSP_ROOT_DIR%generate\new_data\%1" /UNICODE /DCOPY:DAT /COPY:DAT /TIMFIX /MIR /J /ETA /IM /MT:32 /R:3 /W:3 >nul 2>nul
+rd "%OSP_ROOT_DIR%data\%1\default" /s /q 2>nul
+mkdir "%OSP_ROOT_DIR%data\%1\default"
+mkdir "%OSP_ROOT_DIR%generate\new_data\%1\default"
+call initdb --data-checksums --no-locale -U postgres --encoding=UTF8 -D "%OSP_ROOT_DIR%data\%1\default"
+del "%OSP_ROOT_DIR%data\%1\default\pg_hba.conf" "%OSP_ROOT_DIR%data\%1\default\postgresql.conf"
+robocopy "%OSP_ROOT_DIR%data\%1\default" "%OSP_ROOT_DIR%generate\new_data\%1\default" /UNICODE /DCOPY:DAT /COPY:DAT /TIMFIX /MIR /J /ETA /IM /MT:32 /R:3 /W:3 >nul 2>nul
 exit /b 0
 :end
 echo on
