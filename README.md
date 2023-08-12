@@ -2,6 +2,8 @@ Open Server Panel 6 <sup><sup>Beta</sup></sup>
 =======================================
 ![](https://img.shields.io/badge/Apache-2.4-7aba03) ![](https://img.shields.io/badge/Apache_modules-+14-ef509f) ![](https://img.shields.io/badge/Bind-9.16-red) ![](https://img.shields.io/badge/Git-2.41-7aba03) ![](https://img.shields.io/badge/MariaDB-10.1--11.0-blue) ![](https://img.shields.io/badge/Memcached-1.4--1.6-blue) ![](https://img.shields.io/badge/MongoDB-3.0--6.0-blue) ![](https://img.shields.io/badge/MySQL-5.5--8.0-blue) ![](https://img.shields.io/badge/Perl-5.32-7aba03) ![](https://img.shields.io/badge/PHP-7.1--8.2-7aba03) ![](https://img.shields.io/badge/PHP_extensions-+116-ef509f) ![](https://img.shields.io/badge/PostgreSQL-9.5--15.3-blue) ![](https://img.shields.io/badge/Redis-3.0--7.0-blue) ![](https://img.shields.io/badge/Unbound-1.17-7aba03)
 
+PHPINFO: [PHP 7.1](https://ospanel.io/phpinfo/php71.html) | [PHP 7.2](https://ospanel.io/phpinfo/php72.html) | [PHP 7.3](https://ospanel.io/phpinfo/php73.html) | [PHP 7.4](https://ospanel.io/phpinfo/php74.html) | [PHP 8.0](https://ospanel.io/phpinfo/php80.html) | [PHP 8.1](https://ospanel.io/phpinfo/php81.html) | [PHP 8.2](https://ospanel.io/phpinfo/php82.html)
+
 The best tool for local development of websites and web services on the Windows platform.
 
 We present to you a software environment for web developers, which includes a set of server software (WAMP-stack), as well as a simple and convenient control panel in two versions: a web interface and a command line interface (CLI).
@@ -61,8 +63,6 @@ Command Line Interface
 - и многое другое...
 
 [Документация](https://github.com/OSPanel/OpenServerPanel/wiki/Документация) | [Telegram](https://t.me/ospanel_chat)
-
-Посмотреть phpinfo(): [PHP 7.1](https://ospanel.io/phpinfo/php71.html) | [PHP 7.2](https://ospanel.io/phpinfo/php72.html) | [PHP 7.3](https://ospanel.io/phpinfo/php73.html) | [PHP 7.4](https://ospanel.io/phpinfo/php74.html) | [PHP 8.0](https://ospanel.io/phpinfo/php80.html) | [PHP 8.1](https://ospanel.io/phpinfo/php81.html) | [PHP 8.2](https://ospanel.io/phpinfo/php82.html)
 
 Интерфейс командной строки
 ----------
