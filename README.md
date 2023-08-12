@@ -62,6 +62,8 @@ Command Line Interface
 
 [Документация](https://github.com/OSPanel/OpenServerPanel/wiki/Документация) | [Telegram](https://t.me/ospanel_chat)
 
+Посмотреть phpinfo(): [PHP 7.1](https://ospanel.io/phpinfo/php71.html) | [PHP 7.2](https://ospanel.io/phpinfo/php72.html) | [PHP 7.3](https://ospanel.io/phpinfo/php73.html) | [PHP 7.4](https://ospanel.io/phpinfo/php74.html) | [PHP 8.0](https://ospanel.io/phpinfo/php80.html) | [PHP 8.1](https://ospanel.io/phpinfo/php81.html) | [PHP 8.2](https://ospanel.io/phpinfo/php82.html)
+
 Интерфейс командной строки
 ----------
 ![Open Server Panel Console](./resources/screenshots/cli.png)
