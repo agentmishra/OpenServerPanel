@@ -1,5 +1,5 @@
-#define AppVersion      "6.0.0.548"
-#define AppVersion_     "6_0_0_548"
+#define AppVersion      "6.0.0.552"
+#define AppVersion_     "6_0_0_552"
 #define AppDomain       "ospanel.io"
 #define AppTitle        "Open Server Panel"
 #define CurrentYear     GetDateTimeString('yyyy', '', '')
@@ -168,7 +168,7 @@ Name: "redis\redis70";         Description: "Redis 7.0";          Types: full;  
 
 [Files]
 
-Source: "config\*";                                               DestDir: "{app}\config";                        Flags: sortfilesbyextension sortfilesbyname ignoreversion confirmoverwrite;                                  Components: core\panel;                      Permissions: users-full
+Source: "system\default\*";                                       DestDir: "{app}\config";                        Flags: sortfilesbyextension sortfilesbyname ignoreversion confirmoverwrite;                                  Components: core\panel;                      Permissions: users-full
 Source: "licenses\*";                                             DestDir: "{app}\licenses";                      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
 Source: "bin\*";                                                  DestDir: "{app}\bin";                           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: core\panel;                      Permissions: users-full
 Source: "home\*";                                                 DestDir: "{app}\home";                          Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs uninsneveruninstall confirmoverwrite; Components: core\panel;   Permissions: users-full
