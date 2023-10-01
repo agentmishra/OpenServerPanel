@@ -188,7 +188,7 @@ if not "%OSP_MODULES_LIST%"=="" for %%a in (%OSP_MODULES_LIST%) do (
 )
 call :strfind "%OSP_MODULES_LIST_%main:all:" ":%OSP_TMP_NAME%:"
 if not defined OSP_TMPVAL goto invalid
-set "OSP_TMPVAL=OpenServerPanel"
+set "OSP_TMPVAL=general"
 if /i not "%OSP_TMP_NAME%"=="main" set "OSP_TMPVAL=%OSP_TMP_NAME%"
 if /i "%OSP_TMP_NAME%"=="all" set "OSP_TMPVAL=%OSP_ACTIVE_MODULES_LIST%"
 for %%a in (%OSP_TMPVAL%) do (
