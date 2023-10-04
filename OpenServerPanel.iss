@@ -164,7 +164,8 @@ Name: "redis\redis30";         Description: "Redis 3.0";          Types: full;  
 Name: "redis\redis32";         Description: "Redis 3.2";          Types: full;                                    Flags: disablenouninstallwarning
 Name: "redis\redis40";         Description: "Redis 4.0";          Types: full;                                    Flags: disablenouninstallwarning
 Name: "redis\redis50";         Description: "Redis 5.0";          Types: full;                                    Flags: disablenouninstallwarning
-Name: "redis\redis70";         Description: "Redis 7.0";          Types: full;                                    Flags: disablenouninstallwarning 
+Name: "redis\redis70";         Description: "Redis 7.0";          Types: full;                                    Flags: disablenouninstallwarning
+Name: "redis\redis72";         Description: "Redis 7.2";          Types: full;                                    Flags: disablenouninstallwarning
 
 [Files]
 
@@ -243,6 +244,7 @@ Source: "modules\Redis-3.2\*";                                    DestDir: "{app
 Source: "modules\Redis-4.0\*";                                    DestDir: "{app}\modules\Redis-4.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis40;                   Permissions: users-full
 Source: "modules\Redis-5.0\*";                                    DestDir: "{app}\modules\Redis-5.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis50;                   Permissions: users-full
 Source: "modules\Redis-7.0\*";                                    DestDir: "{app}\modules\Redis-7.0";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
+Source: "modules\Redis-7.2\*";                                    DestDir: "{app}\modules\Redis-7.2";             Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis72;                   Permissions: users-full
 
 Source: "modules\Bind\*";                                         DestDir: "{app}\modules\Bind";                  Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
 Source: "modules\Unbound\*";                                      DestDir: "{app}\modules\Unbound";               Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
@@ -303,6 +305,7 @@ Source: "modules\Redis-3.2\ospanel_data\default\*";               DestDir: "{app
 Source: "modules\Redis-4.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-4.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis40;                   Permissions: users-full
 Source: "modules\Redis-5.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-5.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis50;                   Permissions: users-full
 Source: "modules\Redis-7.0\ospanel_data\default\*";               DestDir: "{app}\config\Redis-7.0\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis70;                   Permissions: users-full
+Source: "modules\Redis-7.2\ospanel_data\default\*";               DestDir: "{app}\config\Redis-7.2\default";      Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: redis\redis72;                   Permissions: users-full
 
 Source: "modules\Bind\ospanel_data\default\*";                    DestDir: "{app}\config\Bind\default";           Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\bind;                        Permissions: users-full
 Source: "modules\Unbound\ospanel_data\default\*";                 DestDir: "{app}\config\Unbound\default";        Flags: sortfilesbyextension sortfilesbyname ignoreversion recursesubdirs createallsubdirs confirmoverwrite;  Components: dns\unbound;                     Permissions: users-full
