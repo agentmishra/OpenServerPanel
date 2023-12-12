@@ -3,3 +3,5 @@ licenses/** filter=lfs diff=lfs merge=lfs -text
 /system/bin/** filter=lfs diff=lfs merge=lfs -text
 /user/browscap/** filter=lfs diff=lfs merge=lfs -text
 /user/geo/** filter=lfs diff=lfs merge=lfs -text
+/system/public_html/dist/** filter=lfs diff=lfs merge=lfs -text
+/system/public_html/plugins/** filter=lfs diff=lfs merge=lfs -text
