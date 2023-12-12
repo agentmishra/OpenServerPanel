@@ -1,6 +1,5 @@
 /modules/*/ospanel_data/default_data/*
 /modules/*/*
 /resources/php_addons/*
-/resources/php_bundle/*
 /release/*
 !/modules/*/ospanel_data/
