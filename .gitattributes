@@ -6,3 +6,4 @@ licenses/** filter=lfs diff=lfs merge=lfs -text
 /system/public_html/dist/** filter=lfs diff=lfs merge=lfs -text
 /system/public_html/plugins/** filter=lfs diff=lfs merge=lfs -text
 /resources/php_bundle/** filter=lfs diff=lfs merge=lfs -text
+/resources/php_addons/** filter=lfs diff=lfs merge=lfs -text
