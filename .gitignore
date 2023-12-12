@@ -1,5 +1,3 @@
-/system/public_html/dist/
-/system/public_html/plugins/
 /modules/*/ospanel_data/default_data/*
 /modules/*/*
 /resources/php_addons/*
