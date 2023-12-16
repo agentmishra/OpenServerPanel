@@ -1,5 +1,5 @@
-GPL Ghostscript 10.00.0 (2022-09-21)
-Copyright (C) 2022 Artifex Software, Inc.  All rights reserved.
+GPL Ghostscript 10.01.2 (2023-06-21)
+Copyright (C) 2023 Artifex Software, Inc.  All rights reserved.
 Usage: gs [switches] [file1.ps file2.ps ...]
 Most frequently used switches: (you can use # in place of =)
  -dNOPAUSE           no pause after page   | -q       `quiet', fewer messages
@@ -31,8 +31,8 @@ Available devices:
    tiffscaled8 tiffsep tiffsep1 txtwrite uniprint xpswrite
 Search path:
    C:\OSPanel\modules\PHP-8.0\PHP\lib ; %rom%Resource/Init/ ; %rom%lib/ ;
-   c:/gs/gs10.00.0/Resource/Init ; c:/gs/gs10.00.0/lib ;
-   c:/gs/gs10.00.0/Resource/Font ; c:/gs/fonts
+   c:/gs/gs10.01.2/Resource/Init ; c:/gs/gs10.01.2/lib ;
+   c:/gs/gs10.01.2/Resource/Font ; c:/gs/fonts
 Initialization files are compiled into the executable.
-For more information, see c:/gs/gs10.00.0/doc/Use.htm.
+For more information, see c:/gs/gs10.01.2/doc/Use.htm.
 Please report bugs to bugs.ghostscript.com.
