@@ -19,6 +19,7 @@ call :posgresql PostgreSQL-12
 call :posgresql PostgreSQL-13
 call :posgresql PostgreSQL-14
 call :posgresql PostgreSQL-15
+call :posgresql PostgreSQL-16
 goto end
 :: --------------------------------------------------------------------------------
 :: INIT PostgreSQL
