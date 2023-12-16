@@ -179,11 +179,6 @@ TLS Options:
                                         to log on connect [TLS1_0,TLS1_1,TLS1_2
                                         ,TLS1_3]
 
-Free Monitoring Options:
-  --enableFreeMonitoring arg            Enable Cloud Free Monitoring 
-                                        (on|runtime|off)
-  --freeMonitoringTag arg               Cloud Free Monitoring Tags
-
 AWS IAM Options:
   --awsIamSessionToken arg              AWS Session Token for temporary 
                                         credentials
