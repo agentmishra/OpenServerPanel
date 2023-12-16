@@ -30,10 +30,10 @@ call osp init %1 default
 call osp use %1
 rd "%OSP_ROOT_DIR%data\%1\default" /s /q 2>nul
 mkdir "%OSP_ROOT_DIR%data\%1\default"
-mkdir "%OSP_ROOT_DIR%generate\new_data\%1\default"
+mkdir "%OSP_ROOT_DIR%generate\new_data\%1\ospanel_data\default_data"
 initdb --data-checksums --no-locale -U postgres --encoding=UTF8 -D "%OSP_ROOT_DIR%data\%1\default"
 del "%OSP_ROOT_DIR%data\%1\default\pg_hba.conf" "%OSP_ROOT_DIR%data\%1\default\postgresql.conf"
-robocopy "%OSP_ROOT_DIR%data\%1\default" "%OSP_ROOT_DIR%generate\new_data\%1\default" /UNICODE /DCOPY:DAT /COPY:DAT /TIMFIX /MIR /J /ETA /IM /MT:32 /R:3 /W:3 >nul 2>nul
+robocopy "%OSP_ROOT_DIR%data\%1\default" "%OSP_ROOT_DIR%generate\new_data\%1\ospanel_data\default_data" /UNICODE /DCOPY:DAT /COPY:DAT /TIMFIX /MIR /J /ETA /IM /MT:32 /R:3 /W:3 >nul 2>nul
 exit /b 0
 :end
 echo on
