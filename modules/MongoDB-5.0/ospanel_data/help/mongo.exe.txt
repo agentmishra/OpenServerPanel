@@ -1,4 +1,4 @@
-MongoDB shell version v5.0.18
+MongoDB shell version v5.0.23
 usage: mongo.exe [options] [db address] [file names (ending in .js)]
 db address can be:
   foo                   foo database on local machine
@@ -39,19 +39,6 @@ Options:
   --idleSessionTimeout arg (=0)        Terminate the Shell session if it's been
                                        idle for this many seconds
 
-FLE AWS Options:
-  --awsAccessKeyId arg                 AWS Access Key for FLE Amazon KMS
-  --awsSecretAccessKey arg             AWS Secret Key for FLE Amazon KMS
-  --awsSessionToken arg                Optional AWS Session Token ID
-  --keyVaultNamespace arg              database.collection to store encrypted 
-                                       FLE parameters
-  --kmsURL arg                         Test parameter to override the URL for 
-                                       KMS
-
-AWS IAM Options:
-  --awsIamSessionToken arg             AWS Session Token for temporary 
-                                       credentials
-
 Authentication Options:
   -u [ --username ] arg                username for authentication
   -p [ --password ] arg                password for authentication
@@ -61,6 +48,19 @@ Authentication Options:
                                        using GSSAPI/Kerberos
   --gssapiHostName arg                 Remote host name to use for purpose of 
                                        GSSAPI/Kerberos authentication
+
+AWS IAM Options:
+  --awsIamSessionToken arg             AWS Session Token for temporary 
+                                       credentials
+
+FLE AWS Options:
+  --awsAccessKeyId arg                 AWS Access Key for FLE Amazon KMS
+  --awsSecretAccessKey arg             AWS Secret Key for FLE Amazon KMS
+  --awsSessionToken arg                Optional AWS Session Token ID
+  --keyVaultNamespace arg              database.collection to store encrypted 
+                                       FLE parameters
+  --kmsURL arg                         Test parameter to override the URL for 
+                                       KMS
 
 TLS Options:
   --tls                                use TLS for all connections
