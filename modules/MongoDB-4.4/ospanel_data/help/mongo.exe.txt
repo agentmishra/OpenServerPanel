@@ -1,4 +1,4 @@
-MongoDB shell version v4.4.22
+MongoDB shell version v4.4.26
 usage: mongo.exe [options] [db address] [file names (ending in .js)]
 db address can be:
   foo                   foo database on local machine
