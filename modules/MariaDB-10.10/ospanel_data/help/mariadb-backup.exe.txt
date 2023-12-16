@@ -1,4 +1,5 @@
 Open source backup tool for InnoDB and XtraDB
+
 Copyright (C) 2009-2015 Percona LLC and/or its affiliates.
 Portions Copyright (C) 2000, 2011, MySQL AB & Innobase Oy. All Rights Reserved.
 
