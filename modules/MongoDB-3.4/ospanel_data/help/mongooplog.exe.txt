@@ -1,4 +1,4 @@
-2023-06-20T03:56:32.441+0300	warning: mongooplog is deprecated, and will be removed completely in a future release
+2023-12-17T01:34:32.042+0300	warning: mongooplog is deprecated, and will be removed completely in a future release
 Usage:
   mongooplog --from <remote host> <options>
 
