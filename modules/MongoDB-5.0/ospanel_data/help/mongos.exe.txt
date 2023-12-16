@@ -65,10 +65,6 @@ Windows Service Control Manager options:
   --servicePassword arg                 Password used to authenticate 
                                         serviceUser
 
-AWS IAM Options:
-  --awsIamSessionToken arg              AWS Session Token for temporary 
-                                        credentials
-
 Sharding options:
   --configdb arg                        Connection string for communicating 
                                         with config servers: <config replset 
@@ -77,6 +73,10 @@ Sharding options:
                                         considered local (default 15ms)
   --test                                just run unit tests
   --noscripting                         Disable scripting engine
+
+AWS IAM Options:
+  --awsIamSessionToken arg              AWS Session Token for temporary 
+                                        credentials
 
 TLS Options:
   --tlsOnNormalPorts                    Use TLS on configured ports
