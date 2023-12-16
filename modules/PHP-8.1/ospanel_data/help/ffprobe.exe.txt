@@ -1,3 +1,14 @@
+ffprobe version n6.0-32-gd4a7a6e7fa-20230804 Copyright (c) 2007-2023 the FFmpeg developers
+  built with gcc 13.1.0 (crosstool-NG 1.25.0.196_227d99d)
+  configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth --enable-chromaprint --enable-libdav1d --enable-libdavs2 --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme --enable-libkvazaar --enable-libass --enable-libbluray --disable-libjxl --enable-libmp3lame --enable-libopus --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-lv2 --enable-libvpl --enable-openal --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --disable-vaapi --enable-libvidstab --enable-vulkan --enable-libshaderc --disable-libplacebo --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-ldflags=-pthread --extra-ldexeflags= --extra-libs=-lgomp --extra-version=20230804
+  libavutil      58.  2.100 / 58.  2.100
+  libavcodec     60.  3.100 / 60.  3.100
+  libavformat    60.  3.100 / 60.  3.100
+  libavdevice    60.  1.100 / 60.  1.100
+  libavfilter     9.  3.100 /  9.  3.100
+  libswscale      7.  1.100 /  7.  1.100
+  libswresample   4. 10.100 /  4. 10.100
+  libpostproc    57.  1.100 / 57.  1.100
 Simple multimedia streams analyzer
 usage: ffprobe [OPTIONS] INPUT_FILE
 
@@ -162,6 +173,8 @@ crypto AVOptions:
   -decryption_key    <binary>     .D......... AES decryption key
   -decryption_iv     <binary>     .D......... AES decryption initialization vector
 
+fd AVOptions:
+
 ffrtmpcrypt AVOptions:
   -ffrtmpcrypt_tunneling <int>        .D......... Use a HTTP tunneling connection (RTMPTE). (from 0 to 1) (default 0)
 
@@ -183,7 +196,7 @@ http AVOptions:
   -http_proxy        <string>     ED......... set HTTP proxy to tunnel through
   -headers           <string>     ED......... set custom HTTP headers, can override built in default headers
   -content_type      <string>     ED......... set a specific content type for the POST messages
-  -user_agent        <string>     .D......... override User-Agent header (default "Lavf/59.27.100")
+  -user_agent        <string>     .D......... override User-Agent header (default "Lavf/60.3.100")
   -referer           <string>     .D......... override referer header
   -multiple_requests <boolean>    ED......... use persistent connections (default false)
   -post_data         <binary>     ED......... set custom HTTP post data
@@ -210,7 +223,7 @@ https AVOptions:
   -http_proxy        <string>     ED......... set HTTP proxy to tunnel through
   -headers           <string>     ED......... set custom HTTP headers, can override built in default headers
   -content_type      <string>     ED......... set a specific content type for the POST messages
-  -user_agent        <string>     .D......... override User-Agent header (default "Lavf/59.27.100")
+  -user_agent        <string>     .D......... override User-Agent header (default "Lavf/60.3.100")
   -referer           <string>     .D......... override referer header
   -multiple_requests <boolean>    ED......... use persistent connections (default false)
   -post_data         <binary>     ED......... set custom HTTP post data
@@ -511,13 +524,10 @@ libssh AVOptions:
   -timeout           <int>        ED......... set timeout of socket I/O operations (from -1 to INT_MAX) (default -1)
   -private_key       <string>     ED......... set path to private key
 
-zmq AVOptions:
-  -pkt_size          <int>        ED......... Maximum send/read packet size (from -1 to INT_MAX) (default 131072)
-
-IPFS AVOptions:
+IPFS Gateway AVOptions:
   -gateway           <string>     .D......... The gateway to ask for IPFS data.
 
-IPFS AVOptions:
+IPFS Gateway AVOptions:
   -gateway           <string>     .D......... The gateway to ask for IPFS data.
 
 ADTS muxer AVOptions:
@@ -541,6 +551,8 @@ AST muxer AVOptions:
 ASF (stream) muxer AVOptions:
 
 AVI muxer AVOptions:
+
+avif muxer AVOptions:
 
 dash muxer AVOptions:
 
@@ -646,7 +658,7 @@ RTSP muxer AVOptions:
   -timeout           <int64>      .D......... set timeout (in microseconds) of socket I/O operations (from INT_MIN to I64_MAX) (default 0)
   -reorder_queue_size <int>        .D......... set number of packets to buffer for handling of reordered packets (from -1 to INT_MAX) (default -1)
   -buffer_size       <int>        ED......... Underlying protocol send/receive buffer size (from -1 to INT_MAX) (default -1)
-  -user_agent        <string>     .D......... override User-Agent header (default "Lavf59.27.100")
+  -user_agent        <string>     .D......... override User-Agent header (default "Lavf60.3.100")
 
 (stream) segment muxer AVOptions:
 
@@ -678,8 +690,6 @@ WebP muxer AVOptions:
 
 chromaprint muxer AVOptions:
 
-caca outdev AVOptions:
-
 sdl2 outdev AVOptions:
 
 aa AVOptions:
@@ -695,6 +705,9 @@ Artworx Data Format demuxer AVOptions:
   -linespeed         <int>        .D......... set simulated line speed (bytes per second) (from 1 to INT_MAX) (default 6000)
   -video_size        <image_size> .D......... set video size, such as 640x480 or hd720.
   -framerate         <video_rate> .D......... set framerate (frames per second) (default "25")
+
+generic raw demuxer AVOptions:
+  -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
 
 generic raw demuxer AVOptions:
   -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
@@ -729,6 +742,16 @@ AV1 Annex B/low overhead OBU demuxer AVOptions:
 avi AVOptions:
   -use_odml          <boolean>    .D......... use odml index (default true)
 
+AviSynth demuxer AVOptions:
+  -avisynth_flags    <flags>      .D......... set flags related to reading frame properties from script (AviSynth+ v3.7.1 or higher) (default field_order+range+primaries+transfer+matrix+chroma_location)
+     field_order                  .D......... read field order
+     range                        .D......... read color range
+     primaries                    .D......... read color primaries
+     transfer                     .D......... read color transfer characteristics
+     matrix                       .D......... read matrix coefficients
+     chroma_location              .D......... read chroma location
+     sar                          .D......... read sample aspect ratio
+
 generic raw video demuxer AVOptions:
   -framerate         <video_rate> .D.........  (default "25")
   -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
@@ -746,6 +769,9 @@ bitpacked demuxer AVOptions:
   -pixel_format      <string>     .D......... set pixel format (default "yuv420p")
   -video_size        <image_size> .D......... set frame size
   -framerate         <video_rate> .D......... set frame rate (default "25")
+
+generic raw demuxer AVOptions:
+  -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
 
 generic raw video demuxer AVOptions:
   -framerate         <video_rate> .D.........  (default "25")
@@ -804,6 +830,9 @@ generic raw demuxer AVOptions:
 
 generic raw demuxer AVOptions:
   -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
+
+ea demuxer AVOptions:
+  -merge_alpha       <boolean>    .D.V....... return VP6 alpha in the main video stream (default false)
 
 generic raw demuxer AVOptions:
   -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
@@ -875,6 +904,7 @@ hls demuxer AVOptions:
   -http_multiple     <boolean>    .D......... Use multiple HTTP connections for fetching segments (default auto)
   -http_seekable     <boolean>    .D......... Use HTTP partial requests, 0 = disable, 1 = enable, -1 = auto (default auto)
   -seg_format_options <dictionary> .D......... Set options for segment demuxer
+  -seg_max_retry     <int>        .D......... Maximum number of times to reload a segment on error. (from 0 to INT_MAX) (default 0)
 
 iCE Draw File demuxer AVOptions:
   -linespeed         <int>        .D......... set simulated line speed (bytes per second) (from 1 to INT_MAX) (default 6000)
@@ -1177,7 +1207,7 @@ RTSP demuxer AVOptions:
   -timeout           <int64>      .D......... set timeout (in microseconds) of socket I/O operations (from INT_MIN to I64_MAX) (default 0)
   -reorder_queue_size <int>        .D......... set number of packets to buffer for handling of reordered packets (from -1 to INT_MAX) (default -1)
   -buffer_size       <int>        ED......... Underlying protocol send/receive buffer size (from -1 to INT_MAX) (default -1)
-  -user_agent        <string>     .D......... override User-Agent header (default "Lavf59.27.100")
+  -user_agent        <string>     .D......... override User-Agent header (default "Lavf60.3.100")
 
 generic raw demuxer AVOptions:
   -raw_packet_size   <int>        .D.........  (from 1 to INT_MAX) (default 1024)
@@ -1513,25 +1543,17 @@ imagepipe demuxer AVOptions:
   -video_size        <image_size> .D......... set video size
   -loop              <boolean>    .D......... force loop over input file sequence (default false)
 
+imagepipe demuxer AVOptions:
+  -frame_size        <int>        .D......... force frame size in bytes (from 0 to INT_MAX) (default 0)
+  -framerate         <video_rate> .D......... set the video framerate (default "25")
+  -pixel_format      <string>     .D......... set video pixel format
+  -video_size        <image_size> .D......... set video size
+  -loop              <boolean>    .D......... force loop over input file sequence (default false)
+
 Game Music Emu demuxer AVOptions:
   -track_index       <int>        .D..A...... set track that should be played (from 0 to INT_MAX) (default 0)
   -sample_rate       <int>        .D..A...... set sample rate (from 1000 to 999999) (default 44100)
   -max_size          <int64>      .D..A...... set max file size supported (in bytes) (from 0 to 1.84467e+19) (default 52428800)
-
-ModPlug demuxer AVOptions:
-  -noise_reduction   <int>        .D......... Enable noise reduction 0(off)-1(on) (from 0 to 1) (default 0)
-  -reverb_depth      <int>        .D......... Reverb level 0(quiet)-100(loud) (from 0 to 100) (default 0)
-  -reverb_delay      <int>        .D......... Reverb delay in ms, usually 40-200ms (from 0 to INT_MAX) (default 0)
-  -bass_amount       <int>        .D......... XBass level 0(quiet)-100(loud) (from 0 to 100) (default 0)
-  -bass_range        <int>        .D......... XBass cutoff in Hz 10-100 (from 0 to 100) (default 0)
-  -surround_depth    <int>        .D......... Surround level 0(quiet)-100(heavy) (from 0 to 100) (default 0)
-  -surround_delay    <int>        .D......... Surround delay in ms, usually 5-40ms (from 0 to INT_MAX) (default 0)
-  -max_size          <int>        .D......... Max file size supported (in bytes). Default is 5MB. Set to 0 for no limit (not recommended) (from 0 to 1.04858e+08) (default 5242880)
-  -video_stream_expr <string>     .D......... Color formula
-  -video_stream      <int>        .D......... Make demuxer output a video stream (from 0 to 1) (default 0)
-  -video_stream_w    <int>        .D......... Video stream width in char (one char = 8x8px) (from 20 to 512) (default 30)
-  -video_stream_h    <int>        .D......... Video stream height in char (one char = 8x8px) (from 20 to 512) (default 30)
-  -video_stream_ptxt <int>        .D......... Print speed, tempo, order, ... in video stream (from 0 to 1) (default 1)
 
 libopenmpt AVOptions:
   -sample_rate       <int>        .D..A...... set sample rate (from 1000 to INT_MAX) (default 48000)
@@ -1579,24 +1601,22 @@ lavfi indev AVOptions:
   -graph_file        <string>     .D......... set libavfilter graph filename
   -dumpgraph         <string>     .D......... dump graph to stderr
 
+openal indev AVOptions:
+  -channels          <int>        .D......... set number of channels (from 1 to 2) (default 2)
+  -sample_rate       <int>        .D......... set sample rate (from 1 to 192000) (default 44100)
+  -sample_size       <int>        .D......... set sample size (from 8 to 16) (default 16)
+  -list_devices      <int>        .D......... list available devices (from 0 to 1) (default false)
+     true            1            .D......... 
+     false           0            .D......... 
+
 VFW indev AVOptions:
   -video_size        <string>     .D......... A string describing frame size, such as 640x480 or hd720.
   -framerate         <string>     .D.........  (default "ntsc")
-
-libcdio indev AVOptions:
-  -speed             <int>        .D......... set drive reading speed (from 0 to INT_MAX) (default 0)
-  -paranoia_mode     <flags>      .D......... set error recovery mode (default 0)
-     disable                      .D......... apply no fixups
-     verify                       .D......... verify data integrity in overlap area
-     overlap                      .D......... perform overlapped reads
-     neverskip                    .D......... do not skip failed reads
-     full                         .D......... apply all recovery modes
 
 AVCodecContext AVOptions:
   -flags             <flags>      ED.VAS..... (default 0)
      unaligned                    .D.V....... allow decoders to produce unaligned output
      gray                         ED.V....... only decode/encode grayscale
-     truncated                    .D.V......P (Deprecated, use parsers instead.) Input bitstream might be randomly truncated
      low_delay                    ED.V....... force low delay
      bitexact                     ED.VAS..... use only bitexact functions (except (I)DCT)
      output_corrupt               .D.V....... Output even potentially corrupted frames
@@ -1608,6 +1628,7 @@ AVCodecContext AVOptions:
      export_mvs                   .D.V....... export motion vectors through frame side data
      skip_manual                  .D..A...... do not skip samples and export skip information as frame side data
      ass_ro_flush_noop              .D...S..... do not reset ASS ReadOrder field on flush
+     icc_profiles                 .D...S..... generate/parse embedded ICC profiles from/to colorimetry tags
   -export_side_data  <flags>      ED.VAS..... Export metadata as side data (default 0)
      mvs                          .D.V....... export motion vectors through frame side data
      venc_params                  .D.V....... export video encoding parameters through frame side data
@@ -1800,8 +1821,6 @@ AVCodecContext AVOptions:
      auto                         .D...S.....
      pre_decoder                  .D...S.....
      ignore                       .D...S.....
-  -sub_text_format   <int>        .D...S....P Deprecated, does nothing (from 0 to 1) (default ass)
-     ass             0            .D...S.....
   -apply_cropping    <boolean>    .D.V....... (default true)
   -skip_alpha        <boolean>    .D.V....... Skip processing alpha (default false)
   -field_order       <int>        ED.V....... Field order (from 0 to 5) (default 0)
@@ -1818,6 +1837,7 @@ AVCodecContext AVOptions:
      ignore_level                 .D.V....... ignore level even if the codec level used is unknown or higher than the maximum supported level reported by the hardware driver
      allow_high_depth              .D.V....... allow to output YUV pixel formats with a different chroma sampling than 4:2:0 and/or other than 8 bits per component
      allow_profile_mismatch              .D.V....... attempt to decode anyway if HW accelerated decoder's supported profiles do not exactly match the stream
+     unsafe_output                .D.V....... allow potentially unsafe hwaccel frame output that might require special care to process successfully
   -extra_hw_frames   <int>        .D.V....... Number of extra hardware frames to allocate for the user (from -1 to INT_MAX) (default -1)
   -discard_damaged_percentage <int>        .D.V....... Percentage of damaged samples to discard a frame (from 0 to 100) (default 95)
 
@@ -1850,8 +1870,6 @@ generic mpegvideo encoder AVOptions:
 H.263 encoder AVOptions:
 
 H.263p encoder AVOptions:
-
-Hap encoder AVOptions:
 
 huffyuv AVOptions:
 
@@ -1967,10 +1985,6 @@ MOV text enoder AVOptions:
 
 libaom-av1 encoder AVOptions:
 
-libilbc AVOptions:
-
-libjxl AVOptions:
-
 libmp3lame encoder AVOptions:
 
 libopencore_amrnb AVOptions:
@@ -1981,13 +1995,9 @@ libopus AVOptions:
 
 librav1e AVOptions:
 
-libspeex AVOptions:
-
 libsvtav1 AVOptions:
 
 libtwolame encoder AVOptions:
-
-libvo_amrwbenc AVOptions:
 
 libvorbis AVOptions:
 
@@ -2009,6 +2019,14 @@ XAVS2EContext AVOptions:
 
 libxvid AVOptions:
 
+av1_nvenc AVOptions:
+
+av1_qsv encoder AVOptions:
+
+av1_amf AVOptions:
+
+libopenh264enc AVOptions:
+
 h264_amf AVOptions:
 
 h264_mf AVOptions:
@@ -2024,6 +2042,8 @@ hevc_mf AVOptions:
 hevc_nvenc AVOptions:
 
 hevc_qsv encoder AVOptions:
+
+libkvazaar AVOptions:
 
 mjpeg_qsv encoder AVOptions:
 
@@ -2150,6 +2170,16 @@ AAC decoder AVOptions:
      default         0            .D..A...... normal libavcodec channel order
      coded           1            .D..A...... order in which the channels are coded in the bitstream
 
+AAC decoder AVOptions:
+  -dual_mono_mode    <int>        .D..A...... Select the channel to decode for dual mono (from -1 to 2) (default auto)
+     auto            -1           .D..A...... autoselection
+     main            1            .D..A...... Select Main/Left channel
+     sub             2            .D..A...... Select Sub/Right channel
+     both            0            .D..A...... Select both channels
+  -channel_order     <int>        .D..A...... Order in which the channels are to be exported (from 0 to 1) (default default)
+     default         0            .D..A...... normal libavcodec channel order
+     coded           1            .D..A...... order in which the channels are coded in the bitstream
+
 (E-)AC3 decoder AVOptions:
   -cons_noisegen     <boolean>    .D..A...... enable consistent noise generation (default false)
   -drc_scale         <float>      .D..A...... percentage of dynamic range compression to apply (from 0 to 6) (default 1)
@@ -2256,16 +2286,17 @@ text/vplayer/stl/pjs/subviewer1 decoder AVOptions:
 libaribb24 decoder AVOptions:
   -aribb24-base-path <string>     .D...S..... set the base path for the libaribb24 library
   -aribb24-skip-ruby-text <boolean>    .D...S..... skip ruby text blocks during decoding (default true)
+  -default_profile   <int>        .D...S..... default profile to use if not specified in the stream parameters (from -99 to 1) (default -99)
+     a               0            .D...S..... Profile A
+     c               1            .D...S..... Profile C
 
 libdav1d decoder AVOptions:
   -tilethreads       <int>        .D.V......P Tile threads (from 0 to 256) (default 0)
   -framethreads      <int>        .D.V......P Frame threads (from 0 to 256) (default 0)
+  -max_frame_delay   <int>        .D.V....... Max frame delay (from 0 to 256) (default 0)
   -filmgrain         <boolean>    .D.V......P Apply Film Grain (default auto)
   -oppoint           <int>        .D.V....... Select an operating point of the scalable bitstream (from -1 to 31) (default -1)
   -alllayers         <boolean>    .D.V....... Output all spatial layers (default false)
-
-libilbc AVOptions:
-  -enhance           <int>        .D..A...... Enhance the decoded audio (adds delay) (from 0 to 1) (default 0)
 
 libopenjpeg AVOptions:
   -lowqual           <int>        .D.V....... Limit the number of layers used for decoding (from 0 to INT_MAX) (default 0)
@@ -2429,14 +2460,3 @@ vp9_qsv AVOptions:
      on              1            .D.V.......
      off             2            .D.V.......
 
-ffprobe version 5.1.2-full_build-www.gyan.dev Copyright (c) 2007-2022 the FFmpeg developers
-  built with gcc 12.1.0 (Rev2, Built by MSYS2 project)
-  configuration: --enable-gpl --enable-version3 --enable-shared --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-sdl2 --enable-libaribb24 --enable-libdav1d --enable-libdavs2 --enable-libuavs3d --enable-libzvbi --enable-librav1e --enable-libsvtav1 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libaom --enable-libjxl --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-ffnvcodec --enable-nvdec --enable-nvenc --enable-d3d11va --enable-dxva2 --enable-libmfx --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libilbc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint
-  libavutil      57. 28.100 / 57. 28.100
-  libavcodec     59. 37.100 / 59. 37.100
-  libavformat    59. 27.100 / 59. 27.100
-  libavdevice    59.  7.100 / 59.  7.100
-  libavfilter     8. 44.100 /  8. 44.100
-  libswscale      6.  7.100 /  6.  7.100
-  libswresample   4.  7.100 /  4.  7.100
-  libpostproc    56.  6.100 / 56.  6.100
