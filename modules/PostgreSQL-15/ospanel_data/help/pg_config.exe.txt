@@ -1,3 +1,4 @@
+
 pg_config provides information about the installed version of PostgreSQL.
 
 Usage:

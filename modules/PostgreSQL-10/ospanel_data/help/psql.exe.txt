@@ -48,9 +48,9 @@ Output format options:
                            set record separator for unaligned output to zero byte
 
 Connection options:
-  -h, --host=HOSTNAME      database server host or socket directory (default: "local socket")
+  -h, --host=HOSTNAME      database server host or socket directory (default: "PostgreSQL-10")
   -p, --port=PORT          database server port (default: "5432")
-  -U, --username=USERNAME  database user name (default: "User")
+  -U, --username=USERNAME  database user name (default: "postgres")
   -w, --no-password        never prompt for password
   -W, --password           force password prompt (should happen automatically)
 
