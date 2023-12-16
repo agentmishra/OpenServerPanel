@@ -29,6 +29,7 @@ call :genhelp Redis-3.2 --help
 call :genhelp Redis-4.0 --help
 call :genhelp Redis-5.0 --help
 call :genhelp Redis-7.0 --help
+call :genhelp Redis-7.2 --help
 call :genhelp PostgreSQL-9.5 --help
 call :genhelp PostgreSQL-9.6 --help
 call :genhelp PostgreSQL-10 --help
@@ -37,6 +38,7 @@ call :genhelp PostgreSQL-12 --help
 call :genhelp PostgreSQL-13 --help
 call :genhelp PostgreSQL-14 --help
 call :genhelp PostgreSQL-15 --help
+call :genhelp PostgreSQL-16 --help
 call :genhelp Memcached-1.4 -help
 call :genhelp Memcached-1.6 --help
 call :genhelp MongoDB-3.0 --help
@@ -91,8 +93,6 @@ exit /b 0
 forfiles /S /M *.exe /C "cmd /c if /i not @fname==\"pgAdmin3\" if /i not @fname==\"isolationtester\" if /i not @fname==\"stackbuilder\" call @file %2 > %OSP_ROOT_DIR%modules\%1\ospanel_data\help\@file.txt 2>&1"
 exit /b 0
 :end
-call osp use git
-call git --help > %OSP_ROOT_DIR%modules\git\ospanel_data\help\git.exe.txt 2>&1
 call osp use perl
 call perl --help > %OSP_ROOT_DIR%modules\perl\ospanel_data\help\perl.exe.txt 2>&1
 echo on
