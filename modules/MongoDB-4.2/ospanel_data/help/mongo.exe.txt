@@ -1,4 +1,4 @@
-MongoDB shell version v4.2.24
+MongoDB shell version v4.2.25
 usage: mongo.exe [options] [db address] [file names (ending in .js)]
 db address can be:
   foo                   foo database on local machine
@@ -42,15 +42,6 @@ Authentication Options:
   --gssapiHostName arg                 Remote host name to use for purpose of 
                                        GSSAPI/Kerberos authentication
 
-FLE AWS Options:
-  --awsAccessKeyId arg                 AWS Access Key for FLE Amazon KMS
-  --awsSecretAccessKey arg             AWS Secret Key for FLE Amazon KMS
-  --awsSessionToken arg                Optional AWS Session Token ID
-  --keyVaultNamespace arg              database.collection to store encrypted 
-                                       FLE parameters
-  --kmsURL arg                         Test parameter to override the URL for 
-                                       KMS
-
 TLS Options:
   --tls                                use TLS for all connections
   --tlsCertificateKeyFile arg          PEM certificate/key file for TLS
@@ -65,5 +56,14 @@ TLS Options:
   --tlsCertificateSelector arg         TLS Certificate in system store
   --tlsDisabledProtocols arg           Comma separated list of TLS protocols to
                                        disable [TLS1_0,TLS1_1,TLS1_2]
+
+FLE AWS Options:
+  --awsAccessKeyId arg                 AWS Access Key for FLE Amazon KMS
+  --awsSecretAccessKey arg             AWS Secret Key for FLE Amazon KMS
+  --awsSessionToken arg                Optional AWS Session Token ID
+  --keyVaultNamespace arg              database.collection to store encrypted 
+                                       FLE parameters
+  --kmsURL arg                         Test parameter to override the URL for 
+                                       KMS
 
 file names: a list of files to run. files have to end in .js and will exit after unless --shell is specified
