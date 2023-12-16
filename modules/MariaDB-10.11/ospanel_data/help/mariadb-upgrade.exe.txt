@@ -1,4 +1,4 @@
-mariadb-upgrade.exe  Ver 2.0 Distrib 10.11.4-MariaDB, for Win64 (AMD64)
+mariadb-upgrade.exe  Ver 2.1 Distrib 10.11.6-MariaDB, for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 MariaDB utility for upgrading databases to new MariaDB versions.

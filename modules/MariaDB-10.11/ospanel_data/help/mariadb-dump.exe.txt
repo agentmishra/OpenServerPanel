@@ -1,4 +1,4 @@
-mariadb-dump.exe  Ver 10.19 Distrib 10.11.4-MariaDB, for Win64 (AMD64)
+mariadb-dump.exe  Ver 10.19 Distrib 10.11.6-MariaDB, for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Dumping structure and contents of MariaDB databases and tables.
@@ -271,6 +271,7 @@ The following specify which files/extra groups are read (specified before remain
                       default.
   --system=name       Dump system tables as portable SQL. Any combination of: 
                       all, users, plugins, udfs, servers, stats, timezones
+  Use 'ALL' to set all combinations.
   -T, --tab=name      Create tab-separated textfile for each table to given
                       path. (Create .sql and .txt files.) NOTE: This only works
                       if mysqldump is run on the same machine as the mysqld
@@ -289,4 +290,3 @@ The following specify which files/extra groups are read (specified before remain
   -X, --xml           Dump a database as well formed XML.
   --plugin-dir=name   Directory for client-side plugins.
   --default-auth=name Default authentication client-side plugin to use.
-
