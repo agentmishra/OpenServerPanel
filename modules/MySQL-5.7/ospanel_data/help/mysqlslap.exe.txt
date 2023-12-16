@@ -1,4 +1,4 @@
-mysqlslap.exe  Ver 1.0 Distrib 5.7.42, for Win64 (x86_64)
+mysqlslap.exe  Ver 1.0 Distrib 5.7.44, for Win64 (x86_64)
 Copyright (c) 2005, 2023, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
