@@ -98,6 +98,43 @@ Storage options:
   --nojournal                           Disable journaling (journaling is on by
                                         default for 64 bit)
 
+Windows Service Control Manager options:
+  --install                             Install Windows service
+  --remove                              Remove Windows service
+  --reinstall                           Reinstall Windows service (equivalent 
+                                        to --remove followed by --install)
+  --serviceName arg                     Windows service name
+  --serviceDisplayName arg              Windows service display name
+  --serviceDescription arg              Windows service description
+  --serviceUser arg                     Account for service execution
+  --servicePassword arg                 Password used to authenticate 
+                                        serviceUser
+
+WiredTiger options:
+  --wiredTigerCacheSizeGB arg           Maximum amount of memory to allocate 
+                                        for cache; Defaults to 1/2 of physical 
+                                        RAM
+  --wiredTigerJournalCompressor arg (=snappy)
+                                        Use a compressor for log records 
+                                        [none|snappy|zlib|zstd]
+  --wiredTigerDirectoryForIndexes       Put indexes and data in different 
+                                        directories
+  --wiredTigerMaxCacheOverflowFileSizeGB arg (=0)
+                                        Maximum amount of disk space to use for
+                                        cache overflow; Defaults to 0 
+                                        (unbounded)
+  --wiredTigerCollectionBlockCompressor arg (=snappy)
+                                        Block compression algorithm for 
+                                        collection data [none|snappy|zlib|zstd]
+  --wiredTigerIndexPrefixCompression arg (=1)
+                                        Use prefix compression on row-store 
+                                        leaf pages
+
+Free Monitoring Options:
+  --enableFreeMonitoring arg            Enable Cloud Free Monitoring 
+                                        (on|runtime|off)
+  --freeMonitoringTag arg               Cloud Free Monitoring Tags
+
 TLS Options:
   --tlsOnNormalPorts                    Use TLS on configured ports
   --tlsMode arg                         Set the TLS operation mode 
@@ -131,41 +168,4 @@ TLS Options:
   --tlsLogVersions arg                  Comma separated list of TLS protocols 
                                         to log on connect [TLS1_0,TLS1_1,TLS1_2
                                         ]
-
-Free Monitoring Options:
-  --enableFreeMonitoring arg            Enable Cloud Free Monitoring 
-                                        (on|runtime|off)
-  --freeMonitoringTag arg               Cloud Free Monitoring Tags
-
-Windows Service Control Manager options:
-  --install                             Install Windows service
-  --remove                              Remove Windows service
-  --reinstall                           Reinstall Windows service (equivalent 
-                                        to --remove followed by --install)
-  --serviceName arg                     Windows service name
-  --serviceDisplayName arg              Windows service display name
-  --serviceDescription arg              Windows service description
-  --serviceUser arg                     Account for service execution
-  --servicePassword arg                 Password used to authenticate 
-                                        serviceUser
-
-WiredTiger options:
-  --wiredTigerCacheSizeGB arg           Maximum amount of memory to allocate 
-                                        for cache; Defaults to 1/2 of physical 
-                                        RAM
-  --wiredTigerJournalCompressor arg (=snappy)
-                                        Use a compressor for log records 
-                                        [none|snappy|zlib|zstd]
-  --wiredTigerDirectoryForIndexes       Put indexes and data in different 
-                                        directories
-  --wiredTigerMaxCacheOverflowFileSizeGB arg (=0)
-                                        Maximum amount of disk space to use for
-                                        cache overflow; Defaults to 0 
-                                        (unbounded)
-  --wiredTigerCollectionBlockCompressor arg (=snappy)
-                                        Block compression algorithm for 
-                                        collection data [none|snappy|zlib|zstd]
-  --wiredTigerIndexPrefixCompression arg (=1)
-                                        Use prefix compression on row-store 
-                                        leaf pages
 
