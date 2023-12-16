@@ -1,5 +1,5 @@
 Warning: mysql_plugin is deprecated and will be removed in a future version.
-mysql_plugin.exe  Ver 1.0.0 Distrib 5.7.42
+mysql_plugin.exe  Ver 1.0.0 Distrib 5.7.44
 Copyright (c) 2011, 2023, Oracle and/or its affiliates. All rights reserved.
 
 Enable or disable plugins.
