@@ -13,10 +13,13 @@ call :genhelp MariaDB-10.9 -?
 call :genhelp MariaDB-10.10 -?
 call :genhelp MariaDB-10.11 -?
 call :genhelp MariaDB-11.0 -?
+call :genhelp MariaDB-11.1 -?
+call :genhelp MariaDB-11.2 -?
 call :genhelp MySQL-5.5 -?
 call :genhelp MySQL-5.6 -?
 call :genhelp MySQL-5.7 -?
 call :genhelp MySQL-8.0 -?
+call :genhelp MySQL-8.2 -?
 call :genhelp php-7.1 -?
 call :genhelp php-7.2 -?
 call :genhelp php-7.3 -?
@@ -50,6 +53,7 @@ call :genhelp MongoDB-4.2 --help
 call :genhelp MongoDB-4.4 --help
 call :genhelp MongoDB-5.0 --help
 call :genhelp MongoDB-6.0 --help
+call :genhelp MongoDB-7.0 --help
 call :genhelp Unbound -help
 call :genhelp Bind -help
 goto end
