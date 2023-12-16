@@ -19,7 +19,7 @@ Options:
   -P, --new-port=PORT           new cluster port number (default 50432)
   -r, --retain                  retain SQL and log files after success
   -s, --socketdir=DIR           socket directory to use (default current dir.)
-  -U, --username=NAME           cluster superuser (default "postgres")
+  -U, --username=NAME           cluster superuser (default "User")
   -v, --verbose                 enable verbose internal logging
   -V, --version                 display version information, then exit
   --clone                       clone instead of copying files to new cluster

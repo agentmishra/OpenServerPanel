@@ -16,7 +16,7 @@ Options:
   -p, --old-port=PORT           old cluster port number (default 50432)
   -P, --new-port=PORT           new cluster port number (default 50432)
   -r, --retain                  retain SQL and log files after success
-  -U, --username=NAME           cluster superuser (default "postgres")
+  -U, --username=NAME           cluster superuser (default "User")
   -v, --verbose                 enable verbose internal logging
   -V, --version                 display version information, then exit
   -?, --help                    show this help, then exit

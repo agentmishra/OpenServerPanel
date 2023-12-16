@@ -12,6 +12,7 @@ Options:
       --debug                   turn on debug mode in programs that are run
       --dlpath=DIR              look for dynamic libraries in DIR
       --encoding=ENCODING       use ENCODING as the encoding
+      --expecteddir=DIR         take expected files from DIR (default ".")
   -h, --help                    show this help, then exit
       --inputdir=DIR            take input files from DIR (default ".")
       --launcher=CMD            use CMD as launcher of psql

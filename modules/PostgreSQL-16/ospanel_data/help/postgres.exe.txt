@@ -12,7 +12,7 @@ Options:
   -e                 use European date input format (DMY)
   -F                 turn fsync off
   -h HOSTNAME        host name or IP address to listen on
-  -i                 enable TCP/IP connections
+  -i                 enable TCP/IP connections (deprecated)
   -k DIRECTORY       Unix-domain socket location
   -l                 enable SSL connections
   -N MAX-CONNECT     maximum number of allowed connections
@@ -26,11 +26,10 @@ Options:
 
 Developer options:
   -f s|i|o|b|t|n|m|h forbid use of some plan types
-  -n                 do not reinitialize shared memory after abnormal exit
   -O                 allow system table structure changes
   -P                 disable system indexes
   -t pa|pl|ex        show timings after each query
-  -T                 send SIGSTOP to all backend processes if one dies
+  -T                 send SIGABRT to all backend processes if one dies
   -W NUM             wait NUM seconds to allow attach from a debugger
 
 Options for single-user mode:

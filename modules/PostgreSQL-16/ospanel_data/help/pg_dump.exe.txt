@@ -10,15 +10,18 @@ General options:
   -j, --jobs=NUM               use this many parallel jobs to dump
   -v, --verbose                verbose mode
   -V, --version                output version information, then exit
-  -Z, --compress=0-9           compression level for compressed formats
+  -Z, --compress=METHOD[:DETAIL]
+                               compress as specified
   --lock-wait-timeout=TIMEOUT  fail after waiting TIMEOUT for a table lock
   --no-sync                    do not wait for changes to be written safely to disk
   -?, --help                   show this help, then exit
 
 Options controlling the output content:
   -a, --data-only              dump only the data, not the schema
-  -b, --blobs                  include large objects in dump
-  -B, --no-blobs               exclude large objects in dump
+  -b, --large-objects          include large objects in dump
+  --blobs                      (same as --large-objects, deprecated)
+  -B, --no-large-objects       exclude large objects in dump
+  --no-blobs                   (same as --no-large-objects, deprecated)
   -c, --clean                  clean (drop) database objects before recreating
   -C, --create                 include commands to create database in dump
   -e, --extension=PATTERN      dump the specified extension(s) only
@@ -29,7 +32,7 @@ Options controlling the output content:
                                plain-text format
   -s, --schema-only            dump only the schema, no data
   -S, --superuser=NAME         superuser user name to use in plain-text format
-  -t, --table=PATTERN          dump the specified table(s) only
+  -t, --table=PATTERN          dump only the specified table(s)
   -T, --exclude-table=PATTERN  do NOT dump the specified table(s)
   -x, --no-privileges          do not dump privileges (grant/revoke)
   --binary-upgrade             for use by upgrade utilities only
@@ -38,7 +41,13 @@ Options controlling the output content:
   --disable-triggers           disable triggers during data-only restore
   --enable-row-security        enable row security (dump only content user has
                                access to)
+  --exclude-table-and-children=PATTERN
+                               do NOT dump the specified table(s), including
+                               child and partition tables
   --exclude-table-data=PATTERN do NOT dump data for the specified table(s)
+  --exclude-table-data-and-children=PATTERN
+                               do NOT dump data for the specified table(s),
+                               including child and partition tables
   --extra-float-digits=NUM     override default setting for extra_float_digits
   --if-exists                  use IF EXISTS when dropping objects
   --include-foreign-data=PATTERN
@@ -62,6 +71,8 @@ Options controlling the output content:
   --snapshot=SNAPSHOT          use given snapshot for the dump
   --strict-names               require table and/or schema include patterns to
                                match at least one entity each
+  --table-and-children=PATTERN dump only the specified table(s), including
+                               child and partition tables
   --use-set-session-authorization
                                use SET SESSION AUTHORIZATION commands instead of
                                ALTER OWNER commands to set ownership

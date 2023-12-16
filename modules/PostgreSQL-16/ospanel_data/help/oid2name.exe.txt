@@ -18,7 +18,7 @@ Options:
 Connection options:
   -d, --dbname=DBNAME        database to connect to
   -h, --host=HOSTNAME        database server host or socket directory
-  -H                         same as -h, deprecated option
+  -H                         (same as -h, deprecated)
   -p, --port=PORT            database server port number
   -U, --username=USERNAME    connect as specified database user
 

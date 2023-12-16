@@ -11,6 +11,7 @@ Options:
   -E, --encoding=ENCODING   set default encoding for new databases
   -g, --allow-group-access  allow group read/execute on data directory
       --icu-locale=LOCALE   set ICU locale ID for new databases
+      --icu-rules=RULES     set additional ICU collation rules for new databases
   -k, --data-checksums      use data page checksums
       --locale=LOCALE       set default locale for new databases
       --lc-collate=, --lc-ctype=, --lc-messages=LOCALE
@@ -29,6 +30,7 @@ Options:
       --wal-segsize=SIZE    size of WAL segments, in megabytes
 
 Less commonly used options:
+  -c, --set NAME=VALUE      override default setting for server parameter
   -d, --debug               generate lots of debugging output
       --discard-caches      set debug_discard_caches=1
   -L DIRECTORY              where to find the input files
