@@ -1,4 +1,4 @@
-Blackfire version 2.14.0 (c) 2014-2023 Blackfire SAS
+Blackfire version 2.19.0 (c) 2014-2023 Blackfire SAS
 Blackfire helps developers manage the performance of their applications
 
 Usage:
