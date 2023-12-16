@@ -1,4 +1,4 @@
-mysqlimport.exe  Ver 8.0.33 for Win64 on x86_64 (MySQL Community Server - GPL)
+mysqlimport.exe  Ver 8.2.0 for Win64 on x86_64 (MySQL Community Server - GPL)
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
@@ -13,7 +13,7 @@ file. The SQL command 'LOAD DATA INFILE' is used to import the rows.
 
 Usage: mysqlimport.exe [OPTIONS] database textfile...
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MySQL-8.0\my.ini C:\OSPanel\modules\MySQL-8.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MySQL-8.2\my.ini C:\OSPanel\modules\MySQL-8.2\my.cnf
 The following groups are read: mysqlimport client
 The following options may be given as the first argument:
 --print-defaults        Print the program argument list and exit.
@@ -24,6 +24,7 @@ The following options may be given as the first argument:
 --defaults-group-suffix=#
                         Also read groups with concat(group, suffix)
 --login-path=#          Read this path from the login file.
+--no-login-paths        Don't read login paths from the login path file.
   --bind-address=name IP address to bind to.
   --character-sets-dir=name 
                       Directory for character set files.
@@ -108,6 +109,8 @@ The following options may be given as the first argument:
   --ssl-session-data-continue-on-failed-reuse 
                       If set to ON, this option will allow connection to
                       succeed even if session data cannot be reused.
+  --tls-sni-servername=name
+                      The SNI server name to pass to server
   --use-threads=#     Load files in parallel. The argument is the number of
                       threads to use for loading data.
   -u, --user=name     User for login if not current user.
