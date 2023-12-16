@@ -102,10 +102,6 @@ Storage options:
                                         the oplog. Default is 0 (turned off). 
                                         Fractions are allowed (e.g. 1.5 hours)
 
-AWS IAM Options:
-  --awsIamSessionToken arg              AWS Session Token for temporary 
-                                        credentials
-
 TLS Options:
   --tlsOnNormalPorts                    Use TLS on configured ports
   --tlsMode arg                         Set the TLS operation mode 
@@ -153,10 +149,9 @@ Windows Service Control Manager options:
   --servicePassword arg                 Password used to authenticate 
                                         serviceUser
 
-Free Monitoring Options:
-  --enableFreeMonitoring arg            Enable Cloud Free Monitoring 
-                                        (on|runtime|off)
-  --freeMonitoringTag arg               Cloud Free Monitoring Tags
+AWS IAM Options:
+  --awsIamSessionToken arg              AWS Session Token for temporary 
+                                        credentials
 
 WiredTiger options:
   --wiredTigerCacheSizeGB arg           Maximum amount of memory to allocate 
