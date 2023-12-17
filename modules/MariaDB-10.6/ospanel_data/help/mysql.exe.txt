@@ -1,4 +1,4 @@
-mysql.exe  Ver 15.1 Distrib 10.6.14-MariaDB, for Win64 (AMD64), source revision c93754d45e5d9379e3e23d7ada1d5f21d2711f66
+mysql.exe  Ver 15.1 Distrib 10.6.16-MariaDB, for Win64 (AMD64), source revision b83c379420a8846ae4b28768d3c81fa354cca056
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Usage: mysql.exe [OPTIONS] [database]

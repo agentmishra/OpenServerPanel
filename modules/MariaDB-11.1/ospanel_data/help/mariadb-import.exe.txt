@@ -1,7 +1,7 @@
 Copyright 2000-2008 MySQL AB, 2008 Sun Microsystems, Inc.
 Copyright 2008-2011 Oracle and Monty Program Ab.
 Copyright 2012-2019 MariaDB Corporation Ab.
-mariadb-import.exe from 11.0.2-MariaDB, client 3.7 for Win64 (AMD64)
+mariadb-import.exe from 11.1.3-MariaDB, client 3.7 for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Loads tables from text files in various formats.  The base name of the
@@ -13,7 +13,7 @@ file. The SQL command 'LOAD DATA INFILE' is used to import the rows.
 Usage: mariadb-import.exe [OPTIONS] database textfile...
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.1\data\my.ini C:\OSPanel\modules\MariaDB-11.1\data\my.cnf C:\OSPanel\modules\MariaDB-11.1\my.ini C:\OSPanel\modules\MariaDB-11.1\my.cnf
 The following groups are read: mysqlimport mariadb-import client client-server client-mariadb
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.

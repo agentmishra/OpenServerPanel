@@ -1,4 +1,4 @@
-mysql_plugin.exe  Ver 1.0.0 Distrib 10.6.14-MariaDB
+mysql_plugin.exe  Ver 1.0.0 Distrib 10.6.16-MariaDB
 Copyright (c) 2011, 2015, Oracle and/or its affiliates. All rights reserved.
 
 Enable or disable plugins.

@@ -1,4 +1,4 @@
-mysql_upgrade.exe  Ver 2.0 Distrib 10.6.14-MariaDB, for Win64 (AMD64)
+mysql_upgrade.exe  Ver 2.1 Distrib 10.6.16-MariaDB, for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 MariaDB utility for upgrading databases to new MariaDB versions.

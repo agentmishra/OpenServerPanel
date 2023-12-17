@@ -1,4 +1,4 @@
-innochecksum.exe Ver 10.9.7, for Win64 (AMD64)
+innochecksum.exe Ver 10.9.8, for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 InnoDB offline file checksum utility.
