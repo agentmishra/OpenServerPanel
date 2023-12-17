@@ -1,4 +1,4 @@
-mysql.exe  Ver 8.0.33 for Win64 on x86_64 (MySQL Community Server - GPL)
+mysql.exe  Ver 8.2.0 for Win64 on x86_64 (MySQL Community Server - GPL)
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
@@ -29,8 +29,9 @@ Usage: mysql.exe [OPTIONS] [database]
                       Directory for character set files.
   --column-type-info  Display column type information.
   -c, --comments      Preserve comments. Send comments to the server. The
-                      default is --skip-comments (discard comments), enable
-                      with --comments.
+                      default is --comments (keep comments), disable with
+                      --skip-comments.
+                      (Defaults to on; use --skip-comments to disable.)
   -C, --compress      Use compression in server/client protocol.
   -#, --debug[=#]     This is a non-debug version. Catch this and exit.
   --debug-check       This is a non-debug version. Catch this and exit.
@@ -55,8 +56,13 @@ Usage: mysql.exe [OPTIONS] [database]
                       Disable with --disable-named-commands. This option is
                       disabled by default.
   -i, --ignore-spaces Ignore space after function names.
-  --init-command=name SQL Command to execute when connecting to MySQL server.
-                      Will automatically be re-executed when reconnecting.
+  --init-command=name Single SQL Command to execute when connecting to MySQL
+                      server. Will automatically be re-executed when
+                      reconnecting.
+  --init-command-add=name
+                      Add SQL command to the list to execute when connecting to
+                      MySQL server. Will automatically be re-executed when
+                      reconnecting.
   --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
   -b, --no-beep       Turn off beep on error.
   -h, --host=name     Connect to host.
@@ -127,6 +133,8 @@ Usage: mysql.exe [OPTIONS] [database]
   --ssl-session-data-continue-on-failed-reuse 
                       If set to ON, this option will allow connection to
                       succeed even if session data cannot be reused.
+  --tls-sni-servername=name
+                      The SNI server name to pass to server
   -t, --table         Output in table format.
   --tee=name          Append everything into outfile. See interactive help (\h)
                       also. Does not work in batch mode. Disable with
@@ -184,12 +192,21 @@ Usage: mysql.exe [OPTIONS] [database]
                       Specifies the location of the OCI configuration file.
                       Default for Linux is ~/.oci/config and %HOME/.oci/config
                       on Windows.
+  --telemetry-client  Load the telemetry_client plugin.
   --plugin-authentication-kerberos-client-mode=name 
                       Kerberos authentication mode. Valid values: SSPI, GSSAPI.
                       If not specified, default is SSPI
+  --plugin-authentication-webauthn-client-preserve-privacy
+                      Allows selection of discoverable credential to be used
+                      for signing challenge. default is false - implies
+                      challenge is signed by all credentials for given relying
+                      party.
+  --register-factor=name
+                      Specifies factor for which registration needs to be done
+                      for.
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MySQL-8.0\my.ini C:\OSPanel\modules\MySQL-8.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MySQL-8.2\my.ini C:\OSPanel\modules\MySQL-8.2\my.cnf
 The following groups are read: mysql client
 The following options may be given as the first argument:
 --print-defaults        Print the program argument list and exit.
@@ -200,3 +217,4 @@ The following options may be given as the first argument:
 --defaults-group-suffix=#
                         Also read groups with concat(group, suffix)
 --login-path=#          Read this path from the login file.
+--no-login-paths        Don't read login paths from the login path file.
