@@ -1,4 +1,4 @@
-mariadb-plugin.exe  Ver 1.0.0 Distrib 10.5.21-MariaDB
+mariadb-plugin.exe  Ver 1.0.0 Distrib 10.5.23-MariaDB
 Copyright (c) 2011, 2015, Oracle and/or its affiliates. All rights reserved.
 
 Enable or disable plugins.
