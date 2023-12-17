@@ -1,4 +1,4 @@
-mariadb.exe  Ver 15.1 Distrib 10.5.21-MariaDB, for Win64 (AMD64), source revision bed70468ea08c2820647f5e3ac006a9ff88144ac
+mariadb.exe  Ver 15.1 Distrib 10.5.23-MariaDB, for Win64 (AMD64), source revision 6cfd2ba397b0ca689d8ff1bdb9fc4a4dc516a5eb
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Usage: mariadb.exe [OPTIONS] [database]

@@ -1,4 +1,4 @@
-mysqlcheck.exe  Ver 2.7.4-MariaDB Distrib 10.5.21-MariaDB, for Win64 (AMD64)
+mysqlcheck.exe  Ver 2.7.4-MariaDB Distrib 10.5.23-MariaDB, for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 This program can be used to CHECK (-c, -m, -C), REPAIR (-r), ANALYZE (-a),

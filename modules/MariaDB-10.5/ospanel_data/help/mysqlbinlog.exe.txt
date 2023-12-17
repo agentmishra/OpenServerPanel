@@ -120,7 +120,8 @@ The following specify which files/extra groups are read (specified before remain
                       --stop-never.
   --stop-position=#   Stop reading the binlog at position N. Applies to the
                       last binlog passed on the command line.
-  -T, --table=name    List entries for just this table (local log only).
+  -T, --table=name    List entries for just this table (affects only row
+                      events).
   -t, --to-last-log   Requires -R. Will not stop at the end of the requested
                       binlog but rather continue printing until the end of the
                       last binlog of the MariaDB server. If you send the output
