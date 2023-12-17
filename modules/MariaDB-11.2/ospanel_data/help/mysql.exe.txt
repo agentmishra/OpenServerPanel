@@ -1,10 +1,10 @@
-mysql.exe from 11.0.2-MariaDB, client 15.2 for Win64 (AMD64), source revision 0005f2f06c8e1aea4915887decad67885108a929
+mysql.exe from 11.2.2-MariaDB, client 15.2 for Win64 (AMD64), source revision 929532a9426d085111c24c63de9c23cc54382259
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Usage: mysql.exe [OPTIONS] [database]
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
 The following groups are read: mysql mariadb-client client client-server client-mariadb
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.

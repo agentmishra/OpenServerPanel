@@ -1,4 +1,5 @@
-mysql_client_test_embedded.exe  Ver 2.1 Distrib 5.7.42, for Win64 (x86_64)
+
+mysql_client_test_embedded.exe  Ver 2.1 Distrib 5.7.44, for Win64 (x86_64)
 By Monty, Venu, Kent and others
 
 Copyright (c) 2002, 2023, Oracle and/or its affiliates.

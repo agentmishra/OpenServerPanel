@@ -1,4 +1,4 @@
-mysqld.exe  Ver 11.0.2-MariaDB for Win64 on AMD64 (mariadb.org binary distribution)
+mysqld.exe  Ver 11.2.2-MariaDB for Win64 on AMD64 (mariadb.org binary distribution)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Starts the MariaDB database server.
@@ -16,8 +16,8 @@ NT and Win32 specific options:
 
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
-The following groups are read: mysqld server mysqld-11.0 mariadb mariadb-11.0 mariadbd mariadbd-11.0 client-server
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
+The following groups are read: mysqld server mysqld-11.2 mariadb mariadb-11.2 mariadbd mariadbd-11.2 client-server
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.
 --no-defaults             Don't read default options from any option file.
@@ -103,6 +103,7 @@ The following specify which files/extra groups are read (specified before remain
                       Specifies how corrupted tables should be automatically
                       repaired. Any combination of: NORMAL, BACKUP, FORCE, 
                       QUICK, OFF
+  Use 'ALL' to set all combinations.
   --aria-repair-threads=# 
                       Number of threads to use when repairing Aria tables. The
                       value of 1 disables parallel repair.
@@ -231,6 +232,11 @@ The following specify which files/extra groups are read (specified before remain
                       non-transactional engines for the binary log. If you
                       often use statements updating a great number of rows, you
                       can increase this to get more performance.
+  --block-encryption-mode=name
+                      Default block encryption mode for AES_ENCRYPT() and
+                      AES_DECRYPT() functions. One of: aes-128-ecb, aes-192-ecb,
+                      aes-256-ecb, aes-128-cbc, aes-192-cbc, aes-256-cbc,
+                      aes-128-ctr, aes-192-ctr, aes-256-ctr
   --bootstrap         Used by mysql installation scripts.
   --bulk-insert-buffer-size=# 
                       Size of tree cache used in bulk insert optimisation. Note
@@ -239,6 +245,8 @@ The following specify which files/extra groups are read (specified before remain
                       Don't ignore client side character set value sent during
                       handshake.
                       (Defaults to on; use --skip-character-set-client-handshake to disable.)
+  --character-set-collations=name
+                      Overrides for character set default collations.
   --character-set-filesystem=name 
                       Set the filesystem character set.
   -C, --character-set-server=name 
@@ -334,6 +342,7 @@ The following specify which files/extra groups are read (specified before remain
                       Default flags for the regex library. Any combination of: 
                       DOTALL, DUPNAMES, EXTENDED, EXTENDED_MORE, EXTRA, 
                       MULTILINE, UNGREEDY
+  Use 'ALL' to set all combinations.
   --default-storage-engine=name 
                       The default storage engine for new tables
   --default-time-zone=name 
@@ -629,20 +638,11 @@ The following specify which files/extra groups are read (specified before remain
                       values are FULL_CRC32 for new files, always use CRC-32C;
                       for old, see CRC32 below; STRICT_FULL_CRC32 for new
                       files, always use CRC-32C; for old, see STRICT_CRC32
-                      below; CRC32 write crc32, allow any of the other
-                      checksums to match when reading; STRICT_CRC32 write
+                      below; CRC32 write crc32, allow previously used
+                      algorithms to match when reading; STRICT_CRC32 write
                       crc32, do not allow other algorithms to match when
-                      reading; INNODB write a software calculated checksum,
-                      allow any other checksums to match when reading;
-                      STRICT_INNODB write a software calculated checksum, do
-                      not allow other algorithms to match when reading; NONE
-                      write a constant magic number, do not do any checksum
-                      verification when reading; STRICT_NONE write a constant
-                      magic number, do not allow values other than that magic
-                      number when reading; Files updated when this option is
-                      set to crc32 or strict_crc32 will not be readable by
-                      MariaDB versions older than 10.0.4; new files created
-                      with full_crc32 are readable by MariaDB 10.4.3+
+                      reading; New files created with full_crc32 are readable
+                      by MariaDB 10.4.3+
   --innodb-cmp[=name] Enable or disable INNODB_CMP plugin. One of: ON, OFF,
                       FORCE (don't start if the plugin fails to load),
                       FORCE_PLUS_PERMANENT (like FORCE, but the plugin can not
@@ -715,44 +715,6 @@ The following specify which files/extra groups are read (specified before remain
                       REDUNDANT, COMPACT, and DYNAMIC. The ROW_FORMAT value
                       COMPRESSED is not allowed. One of: redundant, compact, 
                       dynamic
-  --innodb-defragment Enable/disable InnoDB defragmentation (default FALSE).
-                      When set to FALSE, all existing defragmentation will be
-                      paused. And new defragmentation command will fail.Paused
-                      defragmentation commands will resume when this variable
-                      is set to true again.
-  --innodb-defragment-fill-factor=# 
-                      A number between [0.7, 1] that tells defragmentation how
-                      full it should fill a page. Default is 0.9. Number below
-                      0.7 won't make much sense.This variable, together with
-                      innodb_defragment_fill_factor_n_recs, is introduced so
-                      defragmentation won't pack the page too full and cause
-                      page split on the next insert on every page. The variable
-                      indicating more defragmentation gain is the one
-                      effective.
-  --innodb-defragment-fill-factor-n-recs=# 
-                      How many records of space defragmentation should leave on
-                      the page. This variable, together with
-                      innodb_defragment_fill_factor, is introduced so
-                      defragmentation won't pack the page too full and cause
-                      page split on the next insert on every page. The variable
-                      indicating more defragmentation gain is the one
-                      effective.
-  --innodb-defragment-frequency=# 
-                      Do not defragment a single index more than this number of
-                      time per second.This controls the number of time
-                      defragmentation thread can request X_LOCK on an index.
-                      Defragmentation thread will check whether
-                      1/defragment_frequency (s) has passed since it worked on
-                      this index last time, and put the index back to the queue
-                      if not enough time has passed. The actual frequency can
-                      only be lower than this given number.
-  --innodb-defragment-n-pages=# 
-                      Number of pages considered at once when merging multiple
-                      pages to defragment
-  --innodb-defragment-stats-accuracy=# 
-                      How many defragment stats changes there are before the
-                      stats are written to persistent storage. Set to 0 meaning
-                      disable defragment stats tracking.
   --innodb-disable-sort-file-cache 
                       Whether to disable OS system file cache for sort I/O
   --innodb-doublewrite 
@@ -973,9 +935,7 @@ The following specify which files/extra groups are read (specified before remain
                       Number of UNDO log pages to purge in one batch from the
                       history list.
   --innodb-purge-rseg-truncate-frequency[=#] 
-                      Dictates rate at which UNDO records are purged. Value N
-                      means purge rollback segment(s) on every Nth iteration of
-                      purge invocation
+                      Deprecated parameter with no effect
   --innodb-purge-threads[=#] 
                       Number of tasks for purging transaction history
   --innodb-random-read-ahead 
@@ -1209,12 +1169,14 @@ The following specify which files/extra groups are read (specified before remain
   --log-disabled-statements=name 
                       Don't log certain types of statements to general log. Any
                       combination of: slave, sp
+  Use 'ALL' to set all combinations.
   --log-error[=name]  Log errors to file (instead of stdout).  If file name is
                       not specified then 'datadir'/'log-basename'.err or the
                       'pid-file' path with extension .err is used
   --log-isam[=name]   Log all MyISAM changes to file.
   --log-output=name   How logs should be written. Any combination of: NONE, 
                       FILE, TABLE
+  Use 'ALL' to set all combinations.
   --log-queries-not-using-indexes 
                       Log queries that are executed without benefit of any
                       index to the slow log if it is open. Same as
@@ -1233,15 +1195,20 @@ The following specify which files/extra groups are read (specified before remain
   --log-slow-disabled-statements=name 
                       Don't log certain types of statements to slow log. Any
                       combination of: admin, call, slave, sp
+  Use 'ALL' to set all combinations.
   --log-slow-filter=name 
                       Log only certain types of queries to the slow log. If
-                      variable empty alll kind of queries are logged.  All
-                      types are bound by slow_query_time, except
-                      'not_using_index' which is always logged if enabled. Any
-                      combination of: admin, filesort, filesort_on_disk, 
+                      variable empty all kind of queries are logged.  All types
+                      are bound by slow_query_time, except 'not_using_index'
+                      which is always logged if enabled. Any combination of:
+                      admin, filesort, filesort_on_disk,
                       filesort_priority_queue, full_join, full_scan, 
                       not_using_index, query_cache, query_cache_miss, tmp_table,
                       tmp_table_on_disk
+  Use 'ALL' to set all combinations.
+  --log-slow-max-warnings=#
+                      Max numbers of warnings printed to slow query log per
+                      statement
   --log-slow-min-examined-row-limit=# 
                       Don't write queries to slow log that examine fewer rows
                       than that
@@ -1269,7 +1236,8 @@ The following specify which files/extra groups are read (specified before remain
                       (Defaults to on; use --skip-log-slow-slave-statements to disable.)
   --log-slow-verbosity=name 
                       Verbosity level for the slow log. Any combination of: 
-                      innodb, query_plan, explain
+                      innodb, query_plan, explain, engine, warnings, full
+  Use 'ALL' to set all combinations.
   --log-tc=name       Path to transaction coordinator log (used for
                       transactions that affect more than one storage engine,
                       when binary log is disabled).
@@ -1387,6 +1355,7 @@ The following specify which files/extra groups are read (specified before remain
                       Specifies how corrupted tables should be automatically
                       repaired. Any combination of: DEFAULT, BACKUP, FORCE, 
                       QUICK, BACKUP_ALL, OFF
+  Use 'ALL' to set all combinations.
   --myisam-repair-threads=# 
                       If larger than 1, when repairing a MyISAM table all
                       indexes will be created in parallel, with one thread per
@@ -1416,17 +1385,20 @@ The following specify which files/extra groups are read (specified before remain
   --net-write-timeout=# 
                       Number of seconds to wait for a block to be written to a
                       connection before aborting the write
+  --note-verbosity=name
+                      Verbosity level for note-warnings given to the user. See
+                      also @@sql_notes.. Any combination of: basic,
+                      unusable_keys, explain
+  Use 'ALL' to set all combinations.
   --old               Use compatible behavior from previous MariaDB version.
                       See also --old-mode
-  --old-alter-table[=name] 
-                      Alias for alter_algorithm. Deprecated. Use
-                      --alter-algorithm instead.. One of: DEFAULT, COPY, 
-                      INPLACE, NOCOPY, INSTANT
   --old-mode=name     Used to emulate old behavior from earlier MariaDB or
                       MySQL versions. Any combination of: 
                       NO_DUP_KEY_WARNINGS_WITH_IGNORE, NO_PROGRESS_INFO, 
                       ZERO_DATE_TIME_CAST, UTF8_IS_UTF8MB3, 
-                      IGNORE_INDEX_ONLY_FOR_JOIN, COMPAT_5_1_CHECKSUM
+                      IGNORE_INDEX_ONLY_FOR_JOIN, COMPAT_5_1_CHECKSUM,
+                      LOCK_ALTER_TABLE_COPY
+  Use 'ALL' to set all combinations.
   --old-passwords     Use old password encryption method (needed for 4.0 and
                       older clients)
   --old-style-user-limits 
@@ -1469,6 +1441,10 @@ The following specify which files/extra groups are read (specified before remain
   --optimizer-max-sel-arg-weight=# 
                       The maximum weight of the SEL_ARG graph. Set to 0 for no
                       limit
+  --optimizer-max-sel-args=#
+                      The maximum number of SEL_ARG objects created when
+                      optimizing a range. If more objects would be needed, the
+                      range will not be used by the optimizer.
   --optimizer-prune-level=# 
                       Controls the heuristic(s) applied during query
                       optimization to prune less-promising partial plans from
@@ -1520,7 +1496,7 @@ The following specify which files/extra groups are read (specified before remain
                       condition_pushdown_for_derived, split_materialized, 
                       condition_pushdown_for_subquery, rowid_filter, 
                       condition_pushdown_from_having, not_null_range_scan, 
-                      hash_join_cardinality
+                      hash_join_cardinality, cset_narrowing
   --optimizer-trace=name 
                       Controls tracing of the Optimizer:
                       optimizer_trace=option=val[,option=val...], where option
@@ -2086,6 +2062,7 @@ The following specify which files/extra groups are read (specified before remain
                       variable is empty, no conversions are allowed and it is
                       expected that the types match exactly. Any combination
                       of: ALL_LOSSY, ALL_NON_LOSSY
+  Use 'ALL' to set all combinations.
   --slow-launch-time=# 
                       If creating the thread takes longer than this value (in
                       seconds), the Slow_launch_threads counter will be
@@ -2120,6 +2097,7 @@ The following specify which files/extra groups are read (specified before remain
                       NO_ENGINE_SUBSTITUTION, PAD_CHAR_TO_FULL_LENGTH, 
                       EMPTY_STRING_IS_NULL, SIMULTANEOUS_ASSIGNMENT, 
                       TIME_ROUND_FRACTIONAL
+  Use 'ALL' to set all combinations.
   --sql-safe-updates  If set to 1, UPDATEs and DELETEs need either a key in the
                       WHERE clause, or a LIMIT clause, or else they will
                       aborted. Prevents the common mistake of accidentally
@@ -2270,6 +2248,7 @@ The following specify which files/extra groups are read (specified before remain
   --time-format=name  The TIME format (ignored)
   --tls-version=name  TLS protocol version for secure connections.. Any
                       combination of: TLSv1.0, TLSv1.1, TLSv1.2, TLSv1.3
+  Use 'ALL' to set all combinations.
   --tmp-disk-table-size=# 
                       Max size for data for an internal temporary on-disk
                       MyISAM or Aria table.

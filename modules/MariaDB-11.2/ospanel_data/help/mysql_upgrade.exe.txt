@@ -1,10 +1,10 @@
-mysql_upgrade.exe from 11.0.2-MariaDB, client 2.0 for Win64 (AMD64)
+mysql_upgrade.exe from 11.2.2-MariaDB, client 2.1 for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 MariaDB utility for upgrading databases to new MariaDB versions.
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
 The following groups are read: client mysql_upgrade mariadb-upgrade client-server client-mariadb
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.

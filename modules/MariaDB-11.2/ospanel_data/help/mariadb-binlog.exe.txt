@@ -1,4 +1,4 @@
-mariadb-binlog.exe from 11.0.2-MariaDB, client 3.5 for Win64 (AMD64)
+mariadb-binlog.exe from 11.2.2-MariaDB, client 3.5 for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Dumps a MariaDB binary log in a format usable for viewing or for piping to
@@ -7,7 +7,7 @@ the mysql command line client.
 Usage: mariadb-binlog.exe [options] log-files
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
 The following groups are read: mysqlbinlog mariadb-binlog client client-server client-mariadb
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.
@@ -172,7 +172,8 @@ The following specify which files/extra groups are read (specified before remain
                       GTIDs can be passed as a comma separated list, where each
                       must have a unique domain id. Each GTID is inclusive;
                       only events up to the given sequence numbers are printed.
-  -T, --table=name    List entries for just this table (local log only).
+  -T, --table=name    List entries for just this table (affects only row
+                      events).
   -t, --to-last-log   Requires -R. Will not stop at the end of the requested
                       binlog but rather continue printing until the end of the
                       last binlog of the MariaDB server. If you send the output

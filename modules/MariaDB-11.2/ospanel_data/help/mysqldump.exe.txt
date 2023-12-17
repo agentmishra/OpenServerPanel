@@ -1,4 +1,4 @@
-mysqldump.exe from 11.0.2-MariaDB, client 10.19 for Win64 (AMD64)
+mysqldump.exe from 11.2.2-MariaDB, client 10.19 for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Dumping structure and contents of MariaDB databases and tables.
@@ -8,7 +8,7 @@ OR     mysqldump.exe [OPTIONS] --all-databases
 OR     mysqldump.exe [OPTIONS] --system=[SYSTEMOPTIONS]]
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
 The following groups are read: mysqldump mariadb-dump client client-server client-mariadb
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.
@@ -271,6 +271,7 @@ The following specify which files/extra groups are read (specified before remain
                       default.
   --system=name       Dump system tables as portable SQL. Any combination of: 
                       all, users, plugins, udfs, servers, stats, timezones
+  Use 'ALL' to set all combinations.
   -T, --tab=name      Create tab-separated textfile for each table to given
                       path. (Create .sql and .txt files.) NOTE: This only works
                       if mysqldump is run on the same machine as the mysqld
