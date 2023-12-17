@@ -18,8 +18,8 @@ You can download full text of the license on http://www.gnu.org/licenses/gpl-2.0
 Usage: mariadb-backup.exe [--defaults-file=#] [--backup | --prepare | --copy-back | --move-back] [OPTIONS]
 
 Default options are read from the following files in the given order:
-C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.0\data\my.ini C:\OSPanel\modules\MariaDB-11.0\data\my.cnf C:\OSPanel\modules\MariaDB-11.0\my.ini C:\OSPanel\modules\MariaDB-11.0\my.cnf 
-The following groups are read: xtrabackup mariabackup mariadb-backup mysqld server mysqld-11.0 mariadb mariadb-11.0 mariadbd mariadbd-11.0 client-server
+C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-11.2\data\my.ini C:\OSPanel\modules\MariaDB-11.2\data\my.cnf C:\OSPanel\modules\MariaDB-11.2\my.ini C:\OSPanel\modules\MariaDB-11.2\my.cnf
+The following groups are read: xtrabackup mariabackup mariadb-backup mysqld server mysqld-11.2 mariadb mariadb-11.2 mariadbd mariadbd-11.2 client-server
 The following options may be given as the first argument:
 --print-defaults          Print the program argument list and exit.
 --no-defaults             Don't read default options from any option file.
@@ -44,7 +44,7 @@ The following specify which files/extra groups are read (specified before remain
                       time interval between checks done by log copying thread
                       in milliseconds (default is 1 second).
   --extra-lsndir=name (for --backup): save an extra copy of the
-                      xtrabackup_checkpoints file in this directory.
+                      mariadb_backup_checkpoints file in this directory.
   --incremental-lsn=name 
                       (for --backup): copy only .ibd pages newer than specified
                       LSN 'high:low'. ##ATTENTION##: If a wrong LSN value is
@@ -96,7 +96,7 @@ The following specify which files/extra groups are read (specified before remain
   --move-back         Move all the files in a previously made backup from the
                       backup directory to the actual datadir location. Use with
                       caution, as it removes backup files.
-  --galera-info       This options creates the xtrabackup_galera_info file
+  --galera-info       This options creates the mariadb_backup_galera_info file
                       which contains the local node state at the time of the
                       backup. Option should be used when performing the backup
                       of MariaDB Galera Cluster. Has no effect when backup
@@ -104,11 +104,11 @@ The following specify which files/extra groups are read (specified before remain
   --slave-info        This option is useful when backing up a replication slave
                       server. It prints the binary log position and name of the
                       master server. It also writes this information to the
-                      "xtrabackup_slave_info" file as a "CHANGE MASTER"
+                      "mariadb_backup_slave_info" file as a "CHANGE MASTER"
                       command. A new slave for this master can be set up by
                       starting a slave server on this backup and issuing a
                       "CHANGE MASTER" command with the binary log position
-                      saved in the "xtrabackup_slave_info" file.
+                      saved in the "mariadb_backup_slave_info" file.
   --no-lock           Use this option to disable table lock with "FLUSH TABLES
                       WITH READ LOCK". Use it only if ALL your tables are
                       InnoDB and you DO NOT CARE about the binary log position

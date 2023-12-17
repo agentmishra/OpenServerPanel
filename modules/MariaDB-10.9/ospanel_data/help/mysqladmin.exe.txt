@@ -1,4 +1,4 @@
-mysqladmin.exe  Ver 9.1 Distrib 10.9.7-MariaDB, for Win64 on AMD64
+mysqladmin.exe  Ver 9.1 Distrib 10.9.8-MariaDB, for Win64 on AMD64
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Administration program for the mysqld daemon.
@@ -71,3 +71,42 @@ The following specify which files/extra groups are read (specified before remain
                       been sent to all connected slaves
   --plugin-dir=name   Directory for client-side plugins.
   --default-auth=name Default authentication client-side plugin to use.
+
+Where command is a one or more of: (Commands may be shortened)
+  create databasename	  Create a new database
+  debug			  Instruct server to write debug information to log
+  drop databasename	  Delete a database and all its tables
+  extended-status         Gives an extended status message from the server
+  flush-all-statistics    Flush all statistics tables
+  flush-all-status        Flush status and statistics
+  flush-client-statistics Flush client statistics
+  flush-hosts             Flush all cached hosts
+  flush-index-statistics  Flush index statistics
+  flush-logs              Flush all logs
+  flush-privileges        Reload grant tables (same as reload)
+  flush-binary-log        Flush binary log
+  flush-engine-log        Flush engine log(s)
+  flush-error-log         Flush error log
+  flush-general-log       Flush general log
+  flush-relay-log         Flush relay log
+  flush-slow-log          Flush slow query log
+  flush-ssl               Flush SSL certificates
+  flush-status            Clear status variables
+  flush-table-statistics  Clear table statistics
+  flush-tables            Flush all tables
+  flush-threads           Flush the thread cache
+  flush-user-statistics   Flush user statistics
+  flush-user-resources    Flush user resources
+  kill id,id,...	Kill mysql threads
+  password [new-password] Change old password to new-password in current format
+  old-password [new-password] Change old password to new-password in old format
+  ping			Check if mysqld is alive
+  processlist		Show list of active threads in server
+  reload		Reload grant tables
+  refresh		Flush all tables and close and open logfiles
+  shutdown		Take server down
+  status		Gives a short status message from the server
+  start-slave		Start slave
+  stop-slave		Stop slave
+  variables             Prints variables available
+  version		Get version info from server
