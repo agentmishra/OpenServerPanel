@@ -126,6 +126,12 @@ Other actions:
                       removed the Aria log files.
   --zerofill-keep-lsn Like --zerofill but does not zero out LSN of
                       data/index pages.
+Variables:
+--page_buffer_size=#   Size of page buffer. Used by --safe-repair
+--read_buffer_size=#   Read buffer size for sequential reads during scanning
+--sort_buffer_size=#   Size of sort buffer. Used by --recover
+--sort_key_blocks=#    Internal buffer for sorting keys; Don't touch :)
+--write_buffer_size=#  Write buffer size for sequential writes during repair
 
 Default options are read from the following files in the given order:
 C:\Windows\my.ini C:\Windows\my.cnf C:\my.ini C:\my.cnf C:\OSPanel\modules\MariaDB-10.6\data\my.ini C:\OSPanel\modules\MariaDB-10.6\data\my.cnf C:\OSPanel\modules\MariaDB-10.6\my.ini C:\OSPanel\modules\MariaDB-10.6\my.cnf 
