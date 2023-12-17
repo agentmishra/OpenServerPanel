@@ -1,4 +1,4 @@
-mysqladmin.exe  Ver 9.1 Distrib 10.11.4-MariaDB, for Win64 on AMD64
+mysqladmin.exe  Ver 9.1 Distrib 10.11.6-MariaDB, for Win64 on AMD64
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Administration program for the mysqld daemon.
