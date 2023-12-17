@@ -1,4 +1,4 @@
-mariadb.exe from 11.0.2-MariaDB, client 15.2 for Win64 (AMD64), source revision 0005f2f06c8e1aea4915887decad67885108a929
+mariadb.exe from 11.0.4-MariaDB, client 15.2 for Win64 (AMD64), source revision 48af85db217a88409e6aac51bf86e3bf525d8f07
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 Usage: mariadb.exe [OPTIONS] [database]

@@ -1,4 +1,4 @@
-myisampack.exe from 11.0.2-MariaDB, client 1.23 for Win64 (AMD64)
+myisampack.exe from 11.0.4-MariaDB, client 1.23 for Win64 (AMD64)
 Copyright 2002-2008 MySQL AB, 2008 Sun Microsystems, Inc.
 This software comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to modify and redistribute it under the GPL license

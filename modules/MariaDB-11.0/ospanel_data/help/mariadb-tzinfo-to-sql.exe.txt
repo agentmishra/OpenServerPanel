@@ -1,4 +1,4 @@
-mariadb-tzinfo-to-sql.exe from 11.0.2-MariaDB, client 1.1 for Win64 (AMD64)
+mariadb-tzinfo-to-sql.exe from 11.0.4-MariaDB, client 1.1 for Win64 (AMD64)
 
 Create SQL commands for loading system timezeone data for MariaDB
 

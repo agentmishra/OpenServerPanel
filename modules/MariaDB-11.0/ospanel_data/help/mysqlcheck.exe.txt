@@ -1,4 +1,4 @@
-mysqlcheck.exe from 11.0.2-MariaDB, client 2.8 for Win64 (AMD64)
+mysqlcheck.exe from 11.0.4-MariaDB, client 2.8 for Win64 (AMD64)
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
 This program can be used to CHECK (-c, -m, -C), REPAIR (-r), ANALYZE (-a),
@@ -132,8 +132,8 @@ The following specify which files/extra groups are read (specified before remain
   --process-views[=name] 
                       Perform the requested operation (check or repair) on
                       views. One of: NO, YES (correct the checksum, if
-                      necessary, add the mariadb-version field),
-                      UPGRADE_FROM_MYSQL (same as YES and toggle the algorithm
-                      MERGE<->TEMPTABLE.
+                      necessary, add the mariadb-version field), UPGRADE (run
+                      from mariadb-upgrade), UPGRADE_FROM_MYSQL (same as YES
+                      and toggle the algorithm MERGE<->TEMPTABLE.
   --process-tables    Perform the requested operation on tables.
                       (Defaults to on; use --skip-process-tables to disable.)

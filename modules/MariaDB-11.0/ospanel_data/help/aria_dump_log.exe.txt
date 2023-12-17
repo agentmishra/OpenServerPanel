@@ -1,4 +1,4 @@
-aria_dump_log.exe from 11.0.2-MariaDB, client 1.1 for Win64 (AMD64)
+aria_dump_log.exe from 11.0.4-MariaDB, client 1.1 for Win64 (AMD64)
 Copyright (C) 2008 MySQL AB
 This software comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to modify and redistribute it under the GPL license

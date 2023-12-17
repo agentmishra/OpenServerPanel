@@ -1,4 +1,4 @@
-my_print_defaults.exe from 11.0.2-MariaDB, client 1.7 for Win64 (AMD64)
+my_print_defaults.exe from 11.0.4-MariaDB, client 1.7 for Win64 (AMD64)
 This software comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to modify and redistribute it under the GPL license
 
