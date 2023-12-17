@@ -1,4 +1,4 @@
-mariadb-tzinfo-to-sql.exe  Ver 1.1 Distrib 10.9.7-MariaDB, for Win64 (AMD64)
+mariadb-tzinfo-to-sql.exe  Ver 1.1 Distrib 10.9.8-MariaDB, for Win64 (AMD64)
 
 Create SQL commands for loading system timezeone data for MariaDB
 

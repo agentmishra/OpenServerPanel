@@ -172,7 +172,8 @@ The following specify which files/extra groups are read (specified before remain
                       GTIDs can be passed as a comma separated list, where each
                       must have a unique domain id. Each GTID is inclusive;
                       only events up to the given sequence numbers are printed.
-  -T, --table=name    List entries for just this table (local log only).
+  -T, --table=name    List entries for just this table (affects only row
+                      events).
   -t, --to-last-log   Requires -R. Will not stop at the end of the requested
                       binlog but rather continue printing until the end of the
                       last binlog of the MariaDB server. If you send the output
