@@ -1,4 +1,4 @@
-mysqld.exe  Ver 5.7.42 for Win64 on x86_64 (MySQL Community Server (GPL))
+mysqld.exe  Ver 5.7.44 for Win64 on x86_64 (MySQL Community Server (GPL))
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
 
 Oracle is a registered trademark of Oracle Corporation and/or its
