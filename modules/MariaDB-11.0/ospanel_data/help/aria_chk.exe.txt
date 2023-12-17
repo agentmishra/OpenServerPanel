@@ -1,4 +1,4 @@
-aria_chk.exe from 11.0.2-MariaDB, client 1.3 for Win64 (AMD64)
+aria_chk.exe from 11.0.4-MariaDB, client 1.3 for Win64 (AMD64)
 By Monty, for your professional use
 This software comes with NO WARRANTY: see the PUBLIC for details.
 
@@ -126,6 +126,7 @@ Other actions:
                       removed the Aria log files.
   --zerofill-keep-lsn Like --zerofill but does not zero out LSN of
                       data/index pages.
+
 Variables:
 --page_buffer_size=#   Size of page buffer. Used by --safe-repair
 --read_buffer_size=#   Read buffer size for sequential reads during scanning
